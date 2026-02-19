@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Home Discover Screen - Premium Real Estate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#06f9d0",
+                        "background-light": "#EEF6F6", // Updated to Clear Day #EEF6F6
+                        "background-dark": "#0f231f",
+                        "nordic-dark": "#19322F", // Nordic text color
+                        "nordic-muted": "#5C706D",
+                        "mosque": "#006655", // Added Mosque color for active states
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem", 
+                        "lg": "1rem", 
+                        "xl": "1.5rem", 
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 10px 40px -10px rgba(0,0,0,0.05)",
+                        "card": "0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }.hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-nordic-dark dark:text-white font-display antialiased selection:bg-mosque selection:text-white">
+<nav class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-nordic-dark/10 dark:border-white/5">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-20">
+<div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+<div class="w-8 h-8 rounded-lg bg-nordic-dark flex items-center justify-center">
+<span class="material-icons text-white text-lg">apartment</span>
+</div>
+<span class="text-xl font-semibold tracking-tight text-nordic-dark dark:text-white">LuxeEstate</span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-mosque font-medium text-sm border-b-2 border-mosque px-1 py-1" href="#">Buy</a>
+<a class="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">Rent</a>
+<a class="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">Sell</a>
+<a class="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">Saved Homes</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-nordic-dark hover:text-mosque dark:text-gray-400 dark:hover:text-white transition-colors">
+<span class="material-icons">search</span>
+</button>
+<button class="text-nordic-dark hover:text-mosque dark:text-gray-400 dark:hover:text-white transition-colors relative">
+<span class="material-icons">notifications_none</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-background-light dark:border-background-dark"></span>
+</button>
+<button class="flex items-center gap-2 pl-2 border-l border-nordic-dark/10 dark:border-white/10 ml-2">
+<div class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="User profile portrait smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAWhQZ663Bd08kmzjbOPmUk4UIxYooNONShMEFXLR-DtmVi6Oz-TiaY77SPwFk7g0OobkeZEOMvt6v29mSOD0Xm2g95WbBG3ZjWXmiABOUwGU0LOySRfVDo-JTXQ0-gtwjWxbmue0qDm91m-zEOEZwAW6iRFB1qC1bAU-wkjxm67Sbztq8w7srHkFT9bVEC86qG-FzhOBTomhAurNRmx9l8Yfqabk328NfdKuVLckgCdaPsNFE3yN65MeoRi05GA_gXIMwG4YDIeA"/>
+</div>
+</button>
+</div>
+</div>
+</div>
+<div class="md:hidden border-t border-nordic-dark/5 bg-background-light dark:bg-background-dark overflow-hidden h-0 transition-all duration-300">
+<div class="px-4 py-2 space-y-1">
+<a class="block px-3 py-2 rounded-md text-base font-medium text-mosque bg-mosque/10" href="#">Buy</a>
+<a class="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Rent</a>
+<a class="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Sell</a>
+<a class="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Saved Homes</a>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+<section class="py-12 md:py-16">
+<div class="max-w-3xl mx-auto text-center space-y-8">
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-nordic-dark dark:text-white leading-tight">
+                    Find your <span class="relative inline-block">
+<span class="relative z-10 font-medium">sanctuary</span>
+<span class="absolute bottom-2 left-0 w-full h-3 bg-mosque/20 -rotate-1 z-0"></span>
+</span>.
+                </h1>
+<div class="relative group max-w-2xl mx-auto">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-icons text-nordic-muted text-2xl group-focus-within:text-mosque transition-colors">search</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-4 rounded-xl border-none bg-white dark:bg-white/5 text-nordic-dark dark:text-white shadow-soft placeholder-nordic-muted/60 focus:ring-2 focus:ring-mosque focus:bg-white dark:focus:bg-white/10 transition-all text-lg" placeholder="Search by city, neighborhood, or address..." type="text"/>
+<button class="absolute inset-y-2 right-2 px-6 bg-mosque hover:bg-mosque/90 text-white font-medium rounded-lg transition-colors flex items-center justify-center shadow-lg shadow-mosque/20">
+                        Search
+                    </button>
+</div>
+<div class="flex items-center justify-center gap-3 overflow-x-auto hide-scroll py-2 px-4 -mx-4">
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-nordic-dark text-white text-sm font-medium shadow-lg shadow-nordic-dark/10 transition-transform hover:-translate-y-0.5">
+                        All
+                    </button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white dark:bg-white/5 border border-nordic-dark/5 text-nordic-muted hover:text-nordic-dark hover:border-mosque/50 text-sm font-medium transition-all hover:bg-mosque/5">
+                        House
+                    </button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white dark:bg-white/5 border border-nordic-dark/5 text-nordic-muted hover:text-nordic-dark hover:border-mosque/50 text-sm font-medium transition-all hover:bg-mosque/5">
+                        Apartment
+                    </button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white dark:bg-white/5 border border-nordic-dark/5 text-nordic-muted hover:text-nordic-dark hover:border-mosque/50 text-sm font-medium transition-all hover:bg-mosque/5">
+                        Villa
+                    </button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white dark:bg-white/5 border border-nordic-dark/5 text-nordic-muted hover:text-nordic-dark hover:border-mosque/50 text-sm font-medium transition-all hover:bg-mosque/5">
+                        Penthouse
+                    </button>
+<div class="w-px h-6 bg-nordic-dark/10 mx-2"></div>
+<button class="whitespace-nowrap flex items-center gap-1 px-4 py-2 rounded-full text-nordic-dark font-medium text-sm hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+<span class="material-icons text-base">tune</span> Filters
+                    </button>
+</div>
+</div>
+</section>
+<section class="mb-16">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-2xl font-light text-nordic-dark dark:text-white">Featured Collections</h2>
+<p class="text-nordic-muted mt-1 text-sm">Curated properties for the discerning eye.</p>
+</div>
+<a class="hidden sm:flex items-center gap-1 text-sm font-medium text-mosque hover:opacity-70 transition-opacity" href="#">
+                    View all <span class="material-icons text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="group relative rounded-xl overflow-hidden shadow-soft bg-white dark:bg-white/5 cursor-pointer">
+<div class="aspect-[4/3] w-full overflow-hidden relative">
+<img alt="Luxury modern villa exterior with pool" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Luxury modern villa exterior with pool" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCra-FKp81t0_OM8bWD55m2o9OOSnR_v7D0UilyExMImxyIcr9tIMZ2Py3HcC0ra_MtSsBkduMcwxUNKI9_iSXFFr_YRON1SF9hNM3fcYy-uG7N7uusL0Z367WINi1V7_GwfNQx-gsbUqLtzVi4ivFyqFQGb4qBs79bALeSFb6i3_ZnJnI1VVrN-VeZYHjfYyQI5C6zy90N3uxWZpwzIBhNoUDKKQjQ8EOEYPoyPTzhnh6b6AS3dkkFJ8t4xSDC6qjhMrQUoUPnAeM"/>
+<div class="absolute top-4 left-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic-dark dark:text-white">
+                            Exclusive
+                        </div>
+<button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-nordic-dark hover:bg-mosque hover:text-white transition-all">
+<span class="material-icons text-xl">favorite_border</span>
+</button>
+<div class="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+</div>
+<div class="p-6 relative">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-xl font-medium text-nordic-dark dark:text-white group-hover:text-mosque transition-colors">The Glass Pavilion</h3>
+<p class="text-nordic-muted text-sm flex items-center gap-1 mt-1">
+<span class="material-icons text-sm">place</span> Beverly Hills, California
+                                </p>
+</div>
+<span class="text-xl font-semibold text-mosque dark:text-primary">$5,250,000</span>
+</div>
+<div class="flex items-center gap-6 mt-6 pt-6 border-t border-nordic-dark/5 dark:border-white/10">
+<div class="flex items-center gap-2 text-nordic-muted text-sm">
+<span class="material-icons text-lg">king_bed</span> 5 Beds
+                            </div>
+<div class="flex items-center gap-2 text-nordic-muted text-sm">
+<span class="material-icons text-lg">bathtub</span> 4.5 Baths
+                            </div>
+<div class="flex items-center gap-2 text-nordic-muted text-sm">
+<span class="material-icons text-lg">square_foot</span> 4,200 m²
+                            </div>
+</div>
+</div>
+</div>
+<div class="group relative rounded-xl overflow-hidden shadow-soft bg-white dark:bg-white/5 cursor-pointer">
+<div class="aspect-[4/3] w-full overflow-hidden relative">
+<img alt="Modern interior living room with view" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern interior living room with view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDurAGHzg_fpQxFal-obkFVy1Q3WLPdueAQpz0itcQiRV-WfvulnBEDJbNeV8J06q4mX7PTtXYVJjX4-mHVr_khZLZxQ_s8f6fruGqzeqALyMu8wEHRK1EsOs9f4_jPmS7FxcdzrDkR88Wz0GjaPLXkTZRoJQfur59rxYRLi-WYcW-VU_gKS39CPLOMlftvqGvW0IOk5tXgst5mJ4WQM-ICN4vkdel9ido9YFUQga0OI10i6NSe5W4owt33-2YRi_b_ltdZW2QZC5s"/>
+<div class="absolute top-4 left-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic-dark dark:text-white">
+                            New Arrival
+                        </div>
+<button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-nordic-dark hover:bg-mosque hover:text-white transition-all">
+<span class="material-icons text-xl">favorite_border</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-xl font-medium text-nordic-dark dark:text-white group-hover:text-mosque transition-colors">Azure Heights Penthouse</h3>
+<p class="text-nordic-muted text-sm flex items-center gap-1 mt-1">
+<span class="material-icons text-sm">place</span> Downtown, Vancouver
+                                </p>
+</div>
+<span class="text-xl font-semibold text-mosque dark:text-primary">$3,800,000</span>
+</div>
+<div class="flex items-center gap-6 mt-6 pt-6 border-t border-nordic-dark/5 dark:border-white/10">
+<div class="flex items-center gap-2 text-nordic-muted text-sm">
+<span class="material-icons text-lg">king_bed</span> 3 Beds
+                            </div>
+<div class="flex items-center gap-2 text-nordic-muted text-sm">
+<span class="material-icons text-lg">bathtub</span> 3 Baths
+                            </div>
+<div class="flex items-center gap-2 text-nordic-muted text-sm">
+<span class="material-icons text-lg">square_foot</span> 2,100 m²
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-2xl font-light text-nordic-dark dark:text-white">New in Market</h2>
+<p class="text-nordic-muted mt-1 text-sm">Fresh opportunities added this week.</p>
+</div>
+<div class="hidden md:flex bg-white dark:bg-white/5 p-1 rounded-lg">
+<button class="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic-dark text-white shadow-sm">All</button>
+<button class="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark dark:hover:text-white">Buy</button>
+<button class="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark dark:hover:text-white">Rent</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<article class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Modern white house facade" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern white house facade" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuQ9M7U6euA6_cXmYuXnej-N5IuawAW8ds-4G1mzfqmiBc13qXsPhf9_j_zTB8gfEunrBHo8xMsxYwCw_pl8fsxbxRkmyvLR1N9Tiye5ZJG7fwlLn9MwyBanXYhE0emGwp59es1FEyQTRQbmXLUKO74Yj34ZHqrqIkOtMKhP8CmRFvfoHT5LAe10105vUhKNkxIBvtt530nfLigSUTemOOcJMVNmsgactntRJUwOBU_TZzND7BYtDklr8uZcNYlQOK5U74-ufIf-E"/>
+<button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-nordic-dark/90 text-white text-xs font-bold px-2 py-1 rounded">
+                            FOR SALE
+                        </div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-lg text-nordic-dark dark:text-white">$850,000</h3>
+</div>
+<h4 class="text-nordic-dark dark:text-gray-200 font-medium truncate mb-1">Modern Family Home</h4>
+<p class="text-nordic-muted text-xs mb-4">123 Pine St, Seattle</p>
+<div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-white/10">
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">king_bed</span> 3
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">bathtub</span> 2
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">square_foot</span> 120m²
+                            </div>
+</div>
+</div>
+</article>
+<article class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Stylish apartment living room" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Stylish apartment living room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4zNatD3vePhIZAi6OHHJKmamYSgeBNSKjEt32tvkkf4s6aBXCF8R4LNfDfPa9leA0t6N1OKOcP358WwZrnosbCBxSM7EaY2_P7qkx3MinRgmHQn7RvleNTwy8cLigMoR3iv0u83chBVbZYI6BcNMcqv80W-l1pIUgIWZcDIXEqtUatrsojSGfM0lTNDZpkBntBUkRY6NB4ZUymYNYvTHXKbO8NZ6N6uoyuuHqcaRWKzHCNXkOR3p-_EVFAHR8QwijIY_m1mefPZ4"/>
+<button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-mosque/90 text-white text-xs font-bold px-2 py-1 rounded">
+                            FOR RENT
+                        </div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-lg text-nordic-dark dark:text-white">$3,200<span class="text-sm font-normal text-nordic-muted">/mo</span></h3>
+</div>
+<h4 class="text-nordic-dark dark:text-gray-200 font-medium truncate mb-1">Urban Loft</h4>
+<p class="text-nordic-muted text-xs mb-4">456 Elm Ave, Portland</p>
+<div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-white/10">
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">king_bed</span> 1
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">bathtub</span> 1
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">square_foot</span> 85m²
+                            </div>
+</div>
+</div>
+</article>
+<article class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Cabin in the woods" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Cabin in the woods exterior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARQWC19e7mleUpjb8CWLztEv_svJeRFOaC2i-9r9GctFuX5Barzhfai9wNM1WW8bcGlqdFM32d3KPf7SItom5ijdHOz5rGGQPeT7PlWs8-y9LkfcsHLQqsLxalhxP94XJo76_mAMp7T2dVj3hPKHNzTDLLiS6ujSdSsyo3onxQthp4ZkVE8op92gyTLUUucaGaxO8vJvyhH3HuWB07EPqT1WsW0lr9Of5lUPonjG9eiqE1XiJXTqzXUZQt5JorfPwCO1MioZA_Zro"/>
+<button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-nordic-dark/90 text-white text-xs font-bold px-2 py-1 rounded">
+                            FOR SALE
+                        </div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-lg text-nordic-dark dark:text-white">$620,000</h3>
+</div>
+<h4 class="text-nordic-dark dark:text-gray-200 font-medium truncate mb-1">Highland Retreat</h4>
+<p class="text-nordic-muted text-xs mb-4">789 Mountain Rd, Bend</p>
+<div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-white/10">
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">king_bed</span> 2
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">bathtub</span> 2
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">square_foot</span> 98m²
+                            </div>
+</div>
+</div>
+</article>
+<article class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Bright bedroom with large window" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Bright bedroom with large window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGq4Phm0uDzCnjHAsnWpYTBVpOds_M6iOsJuRQQA5eUZHkztGgtc7eh_OE6wBeyW1-iZh7yyhROnvvmqkAZ9tyAWFGXk0FG52zU4kZ_EDLA0U0cRszy7byNXTeWe0_hS53SYmtCTEV8Y1AM-WxiIC38UMa15QwFDjXtCGQOxoh35K0Ol_70vfsxm0VqDbaWkr8tcEbLTLy0NXH_GcpGK4lAXizgxYOIlFWGyau-4OIfPZRpjCBDbz_qu3VlN201UUJGiuM9ajVd-U"/>
+<button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-mosque/90 text-white text-xs font-bold px-2 py-1 rounded">
+                            FOR RENT
+                        </div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-lg text-nordic-dark dark:text-white">$4,500<span class="text-sm font-normal text-nordic-muted">/mo</span></h3>
+</div>
+<h4 class="text-nordic-dark dark:text-gray-200 font-medium truncate mb-1">Sea View Penthouse</h4>
+<p class="text-nordic-muted text-xs mb-4">321 Ocean Dr, Miami</p>
+<div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-white/10">
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">king_bed</span> 3
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">bathtub</span> 3
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">square_foot</span> 180m²
+                            </div>
+</div>
+</div>
+</article>
+<article class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col hidden xl:flex">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Cozy apartment interior" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Cozy apartment interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1w-Hb1289NqZKon3VK8bpmMiCDYYiAMT5egzTINo9m9wSZRHv-k-1IGTVoL1NT8YeZXJHa87JPNDIPrtrbP7jChHq0ypXF90uByhC6VA9O788_B4FY8JVg4chbWN9bcrn9-9FvVvfZX8Aj60Iqg_C8CsCA9DEnJqi2rJvzmK5UP5z-9XRTRjBneAPCa8iGgGWBD9yYKsziN6vn0ePBDGo3inieQtmbr46W31p6UfQ649XRxTm7ygOY2J-jxW1r0qWs8i97KGpkTE"/>
+<button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-nordic-dark/90 text-white text-xs font-bold px-2 py-1 rounded">
+                            FOR SALE
+                        </div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-lg text-nordic-dark dark:text-white">$550,000</h3>
+</div>
+<h4 class="text-nordic-dark dark:text-gray-200 font-medium truncate mb-1">Central Studio</h4>
+<p class="text-nordic-muted text-xs mb-4">555 Main St, Chicago</p>
+<div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-white/10">
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">king_bed</span> 1
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">bathtub</span> 1
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">square_foot</span> 50m²
+                            </div>
+</div>
+</div>
+</article>
+<article class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col hidden lg:flex">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Modern minimalist home exterior" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern minimalist home exterior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfGXdY0g51ojSg0GMeTW9ndLY3mpKK3oMtWxo2nwd_dwi1pgn1Boi_ovaDGIFhUA7nwu3WdBch8ZuHxoHu3QfgM5ceAsp8pglRVyCROWNcy9zeDNP2wqLoevyKGcaEyFYHYpIx2KK46nLWthnHiHugmkKw48kJsL8IjMO1bL3T1Zwt8bvQDTTUHTgB3GqZ2RU2asRzF1jVg0rLw3LWXXTq0YF1CsbhlWpYOuCEpH5bB8zkBlbKXR4At_M46AL8rJqn5c6BrPD5PP8"/>
+<button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
+<span class="material-icons text-lg">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-mosque/90 text-white text-xs font-bold px-2 py-1 rounded">
+                            FOR RENT
+                        </div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-lg text-nordic-dark dark:text-white">$2,800<span class="text-sm font-normal text-nordic-muted">/mo</span></h3>
+</div>
+<h4 class="text-nordic-dark dark:text-gray-200 font-medium truncate mb-1">Garden Villa</h4>
+<p class="text-nordic-muted text-xs mb-4">999 Oak Ln, Austin</p>
+<div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-white/10">
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">king_bed</span> 2
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">bathtub</span> 2
+                            </div>
+<div class="flex items-center gap-1 text-nordic-muted text-xs">
+<span class="material-icons text-sm text-mosque/80">square_foot</span> 110m²
+                            </div>
+</div>
+</div>
+</article>
+</div>
+<div class="mt-12 text-center">
+<button class="px-8 py-3 bg-white dark:bg-white/5 border border-nordic-dark/10 dark:border-white/10 hover:border-mosque hover:text-mosque text-nordic-dark dark:text-white font-medium rounded-lg transition-all hover:shadow-md">
+                    Load more properties
+                </button>
+</div>
+</section>
+</main>
+
+</body></html>
