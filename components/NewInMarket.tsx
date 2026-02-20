@@ -1,7 +1,22 @@
-import { newInMarket } from '@/data/mockData';
 import PropertyCard from './ui/PropertyCard';
+import Pagination from './Pagination';
+import { Property } from '@/types/property';
 
-const NewInMarket = () => {
+interface NewInMarketProps {
+  properties: Property[];
+  totalCount: number;
+  currentPage: number;
+  pageSize: number;
+}
+
+const NewInMarket = ({
+  properties,
+  totalCount,
+  currentPage,
+  pageSize,
+}: NewInMarketProps) => {
+  const totalPages = Math.ceil(totalCount / pageSize);
+
   return (
     <section>
       <div className="flex items-end justify-between mb-8">
@@ -25,16 +40,16 @@ const NewInMarket = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {newInMarket.map((property) => (
+        {properties.map((property) => (
           <PropertyCard key={property.id} property={property} />
         ))}
       </div>
 
-      <div className="mt-12 text-center">
-        <button className="px-8 py-3 bg-white border border-nordic/10 hover:border-mosque hover:text-mosque text-nordic font-medium rounded-lg transition-all hover:shadow-md">
-          Load more properties
-        </button>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        baseUrl="/"
+      />
     </section>
   );
 };
