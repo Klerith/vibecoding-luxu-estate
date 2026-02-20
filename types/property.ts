@@ -12,4 +12,5 @@ export interface Property {
   type: PropertyType;
   is_new: boolean;
   created_at: string;
+  is_featured?: boolean;
 }
