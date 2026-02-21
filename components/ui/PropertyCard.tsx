@@ -15,7 +15,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
       {/* Image Container */}
       <div className="relative aspect-4/3 overflow-hidden">
         <Image
-          src={property.image}
+          src={property.images[0]}
           alt={property.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"

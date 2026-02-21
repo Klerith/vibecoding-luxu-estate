@@ -6,8 +6,7 @@ export interface Property {
   slug?: string;
   location: string;
   price: number;
-  image: string;
-  images?: string[];
+  images: string[];
   beds: number;
   baths: number;
   sqft: number;

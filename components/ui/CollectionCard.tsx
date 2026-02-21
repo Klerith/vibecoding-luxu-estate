@@ -15,7 +15,7 @@ const CollectionCard = ({ collection }: CollectionCardProps) => {
       {/* Image Container */}
       <div className="aspect-4/3 w-full overflow-hidden relative">
         <Image
-          src={collection.image}
+          src={collection.images[0]}
           alt={collection.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"

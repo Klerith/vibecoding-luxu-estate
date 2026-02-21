@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PropertyPageProps) {
   const supabase = await createClient();
   const { data: property } = await supabase
     .from('properties')
-    .select('title, price, image')
+    .select('title, price, images')
     .eq('slug', slug)
     .single();
 
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PropertyPageProps) {
       },
     ).format(property.price)}`,
     openGraph: {
-      images: [property.image],
+      images: property.images,
     },
   };
 }
@@ -64,10 +64,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
           <div className="lg:col-span-8 space-y-4">
-            <PropertyGallery
-              images={property.images || [property.image]}
-              title={property.title}
-            />
+            <PropertyGallery images={property.images} title={property.title} />
           </div>
 
           <div className="lg:col-span-4 relative">
