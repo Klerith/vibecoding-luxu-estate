@@ -7,20 +7,49 @@ import { createClient } from '@/lib/supabase/server';
 const PAGE_SIZE = 8;
 
 interface HomePageProps {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{
+    page?: string;
+    location?: string;
+    minPrice?: string;
+    maxPrice?: string;
+    type?: string;
+    beds?: string;
+    baths?: string;
+  }>;
 }
 
 export default async function Home({ searchParams }: HomePageProps) {
-  const { page } = await searchParams;
+  const { page, location, minPrice, maxPrice, type, beds, baths } =
+    await searchParams;
   const currentPage = Math.max(1, parseInt(page ?? '1', 10));
   const from = (currentPage - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
 
   const supabase = await createClient();
 
-  const { data: properties, count } = await supabase
-    .from('properties')
-    .select('*', { count: 'exact' })
+  let query = supabase.from('properties').select('*', { count: 'exact' });
+
+  if (location) {
+    query = query.ilike('location', `%${location}%`);
+  }
+  if (minPrice) {
+    query = query.gte('price', parseInt(minPrice, 10));
+  }
+  if (maxPrice) {
+    query = query.lte('price', parseInt(maxPrice, 10));
+  }
+  if (type && type !== 'Any Type') {
+    // We map 'type' from UI to the title since our schema uses title for 'Villa/House/etc.'
+    query = query.ilike('title', `%${type}%`);
+  }
+  if (beds) {
+    query = query.gte('beds', parseInt(beds, 10));
+  }
+  if (baths) {
+    query = query.gte('baths', parseInt(baths, 10));
+  }
+
+  const { data: properties, count } = await query
     .order('created_at', { ascending: false })
     .range(from, to);
 

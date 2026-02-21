@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Search Filters Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#006611",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0f2312",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom range slider styling */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #006611;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 0 4px white;
+            border: 1px solid #e5e7eb;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #006611;
+            cursor: pointer;
+            box-shadow: 0 0 0 4px white;
+            border: 1px solid #e5e7eb;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #E5E7EB;
+            border-radius: 2px;
+        }
+        
+        /* Hide scrollbar for clean modal look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-100 min-h-screen flex items-center justify-center p-4">
+<!-- Background Image Layer to simulate app context -->
+<div class="fixed inset-0 z-0 opacity-10 pointer-events-none" data-alt="Modern luxury home exterior blurred background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDoSh7bCIKgaMhgJnEWdRkH3_ZuDeg09ALe8WS9dD7gtkzKBf7CBqgpivJDNX8El0EYOWPKs4NS5QaEBHIkK-iuDlOX5WnEiUmUonb4qrsXXXB61Qd0zzUm4V7hcQnQd9-CdydTKt8_AtyEsW-wAdOh-oGpp2sl4g4c_gRocCsh__C8LfxXqjSY_2ZzS2zNluerhVwTNouiD4RTxwLFFLFgOW1zhJr2VoYULE6gl8X2Jy2r70A64l7u9QwknqtTd_rQ0OflanZyJBk'); background-size: cover; background-position: center;"></div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-10 transition-opacity"></div>
+<!-- Main Modal Container -->
+<main class="relative z-20 w-full max-w-2xl bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+<!-- Header -->
+<header class="px-8 py-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-white dark:bg-gray-900 sticky top-0 z-30">
+<h1 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Filters</h1>
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-500 dark:text-gray-400">
+<span class="material-icons">close</span>
+</button>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto no-scrollbar p-8 space-y-10">
+<!-- Section 1: Location -->
+<section>
+<label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Location</label>
+<div class="relative group">
+<span class="material-icons absolute left-4 top-3.5 text-gray-400 group-focus-within:text-primary transition-colors">location_on</span>
+<input class="w-full pl-12 pr-4 py-3 bg-background-light dark:bg-gray-800 border-0 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-gray-800 transition-all shadow-sm" placeholder="City, neighborhood, or address" type="text" value="San Francisco, CA"/>
+</div>
+</section>
+<!-- Section 2: Price Range -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Price Range</label>
+<span class="text-sm font-medium text-primary">$1.2M – $4.5M</span>
+</div>
+<div class="relative h-12 flex items-center mb-6 px-2">
+<!-- Custom Fake Slider Visual -->
+<div class="absolute w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/3 ml-[20%]"></div>
+</div>
+<!-- Handles (Visual only for mock) -->
+<div class="absolute left-[20%] w-6 h-6 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer hover:scale-110 transition-transform -ml-3 z-10"></div>
+<div class="absolute left-[53%] w-6 h-6 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer hover:scale-110 transition-transform -ml-3 z-10"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-background-light dark:bg-gray-800 p-3 rounded-lg border border-transparent focus-within:border-primary/30 transition-colors">
+<label class="block text-[10px] text-gray-500 uppercase font-medium mb-1">Min Price</label>
+<div class="flex items-center">
+<span class="text-gray-400 mr-1">$</span>
+<input class="w-full bg-transparent border-0 p-0 text-gray-900 dark:text-white font-medium focus:ring-0 text-sm" type="text" value="1,200,000"/>
+</div>
+</div>
+<div class="bg-background-light dark:bg-gray-800 p-3 rounded-lg border border-transparent focus-within:border-primary/30 transition-colors">
+<label class="block text-[10px] text-gray-500 uppercase font-medium mb-1">Max Price</label>
+<div class="flex items-center">
+<span class="text-gray-400 mr-1">$</span>
+<input class="w-full bg-transparent border-0 p-0 text-gray-900 dark:text-white font-medium focus:ring-0 text-sm" type="text" value="4,500,000"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Property Details -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Property Type -->
+<div class="space-y-3">
+<label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property Type</label>
+<div class="relative">
+<select class="w-full bg-background-light dark:bg-gray-800 border-0 rounded-lg py-3 pl-4 pr-10 text-gray-900 dark:text-white appearance-none focus:ring-2 focus:ring-primary cursor-pointer">
+<option>Any Type</option>
+<option>House</option>
+<option>Apartment</option>
+<option>Condo</option>
+<option>Townhouse</option>
+</select>
+<span class="material-icons absolute right-3 top-3 text-gray-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Rooms -->
+<div class="space-y-4">
+<!-- Beds -->
+<div class="flex justify-between items-center">
+<span class="text-sm font-medium text-gray-900 dark:text-gray-100">Bedrooms</span>
+<div class="flex items-center space-x-3 bg-background-light dark:bg-gray-800 rounded-full p-1">
+<button class="w-8 h-8 rounded-full bg-white dark:bg-gray-700 shadow-sm flex items-center justify-center text-gray-500 hover:text-primary disabled:opacity-50 transition-colors">
+<span class="material-icons text-base">remove</span>
+</button>
+<span class="text-sm font-semibold w-4 text-center">3+</span>
+<button class="w-8 h-8 rounded-full bg-white dark:bg-gray-700 shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-icons text-base">add</span>
+</button>
+</div>
+</div>
+<!-- Baths -->
+<div class="flex justify-between items-center">
+<span class="text-sm font-medium text-gray-900 dark:text-gray-100">Bathrooms</span>
+<div class="flex items-center space-x-3 bg-background-light dark:bg-gray-800 rounded-full p-1">
+<button class="w-8 h-8 rounded-full bg-white dark:bg-gray-700 shadow-sm flex items-center justify-center text-gray-500 hover:text-primary transition-colors">
+<span class="material-icons text-base">remove</span>
+</button>
+<span class="text-sm font-semibold w-4 text-center">2+</span>
+<button class="w-8 h-8 rounded-full bg-white dark:bg-gray-700 shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-icons text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Amenities -->
+<section>
+<label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">Amenities &amp; Features</label>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+<!-- Toggle Chip Active -->
+<label class="cursor-pointer group relative">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="h-full px-4 py-3 rounded-lg border border-primary bg-primary/5 dark:bg-primary/20 text-primary dark:text-primary-light font-medium text-sm flex items-center justify-center gap-2 transition-all peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary hover:bg-primary/10">
+<span class="material-icons text-lg">pool</span>
+                            Swimming Pool
+                        </div>
+<div class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full opacity-100 transition-opacity"></div>
+</label>
+<!-- Toggle Chip Inactive -->
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<div class="h-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm flex items-center justify-center gap-2 transition-all hover:border-gray-300 dark:hover:border-gray-600 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary">
+<span class="material-icons text-lg text-gray-400 group-hover:text-gray-500 peer-checked:text-primary">fitness_center</span>
+                            Gym
+                        </div>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<div class="h-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm flex items-center justify-center gap-2 transition-all hover:border-gray-300 dark:hover:border-gray-600 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary">
+<span class="material-icons text-lg text-gray-400 group-hover:text-gray-500 peer-checked:text-primary">local_parking</span>
+                            Parking
+                        </div>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<div class="h-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm flex items-center justify-center gap-2 transition-all hover:border-gray-300 dark:hover:border-gray-600 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary">
+<span class="material-icons text-lg text-gray-400 group-hover:text-gray-500 peer-checked:text-primary">ac_unit</span>
+                            Air Conditioning
+                        </div>
+</label>
+<label class="cursor-pointer group">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="h-full px-4 py-3 rounded-lg border border-primary bg-primary/5 dark:bg-primary/20 text-primary dark:text-primary-light font-medium text-sm flex items-center justify-center gap-2 transition-all peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary hover:bg-primary/10">
+<span class="material-icons text-lg">wifi</span>
+                            High-speed Wifi
+                        </div>
+<div class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full opacity-100 transition-opacity"></div>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<div class="h-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm flex items-center justify-center gap-2 transition-all hover:border-gray-300 dark:hover:border-gray-600 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary">
+<span class="material-icons text-lg text-gray-400 group-hover:text-gray-500 peer-checked:text-primary">deck</span>
+                            Patio / Terrace
+                        </div>
+</label>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 px-8 py-6 sticky bottom-0 z-30 flex items-center justify-between">
+<button class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors underline decoration-gray-300 underline-offset-4">
+                Clear all filters
+            </button>
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium shadow-lg shadow-primary/30 transition-all hover:shadow-primary/40 flex items-center gap-2 transform active:scale-95">
+                Show 124 Homes
+                <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</footer>
+</main>
+</body></html>
