@@ -3,9 +3,11 @@ export type PropertyType = 'sale' | 'rent';
 export interface Property {
   id: string;
   title: string;
+  slug?: string;
   location: string;
   price: number;
   image: string;
+  images?: string[];
   beds: number;
   baths: number;
   sqft: number;
@@ -13,4 +15,6 @@ export interface Property {
   is_new: boolean;
   created_at: string;
   is_featured?: boolean;
+  lat?: number;
+  lng?: number;
 }

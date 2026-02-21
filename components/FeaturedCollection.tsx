@@ -15,6 +15,7 @@ const FeaturedCollection = async () => {
   const collections: Collection[] = (properties || []).map((p) => ({
     id: p.id,
     title: p.title,
+    slug: p.slug,
     location: p.location,
     price: p.price,
     image: p.image,

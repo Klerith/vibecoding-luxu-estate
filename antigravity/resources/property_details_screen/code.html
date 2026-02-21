@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Property Details Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --nordic: #19322F;
+            --mosque: #006655;
+            --clear-day: #EEF6F6;
+        }
+        @layer base {
+            body {
+                @apply bg-[var(--clear-day)] text-[var(--nordic)] font-display antialiased;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "nordic": "#19322F",
+                        "mosque": "#006655",
+                        "clear-day": "#EEF6F6",
+                        "primary": "#006655",
+                        "primary-hover": "#005544",
+                        "primary-light": "#e6f0ee",
+                        "background-light": "#EEF6F6",
+                        "background-dark": "#0f2320",
+                        "neutral-surface": "#ffffff",
+                        "neutral-dark-surface": "#162e2a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-clear-day text-nordic selection:bg-mosque/20">
+<nav class="sticky top-0 z-50 bg-clear-day border-b border-mosque/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-20 items-center">
+<div class="flex-shrink-0 flex items-center gap-2">
+<span class="material-symbols-outlined text-mosque text-3xl font-bold">villa</span>
+<span class="font-bold text-xl tracking-tight text-nordic">LuxeEstate</span>
+</div>
+<div class="hidden md:flex items-center space-x-10">
+<a class="relative text-sm font-semibold text-nordic hover:text-mosque transition-colors py-2" href="#">
+                    Buy
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-mosque"></span>
+</a>
+<a class="text-sm font-semibold text-nordic/70 hover:text-mosque transition-colors py-2" href="#">Rent</a>
+<a class="text-sm font-semibold text-nordic/70 hover:text-mosque transition-colors py-2" href="#">Sell</a>
+<a class="text-sm font-semibold text-nordic/70 hover:text-mosque transition-colors py-2" href="#">Saved Homes</a>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-nordic hover:text-mosque transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 text-nordic hover:text-mosque transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-mosque rounded-full"></span>
+</button>
+<button class="ml-2 flex items-center gap-2 p-1 rounded-full hover:bg-mosque/5 transition-colors">
+<div class="w-9 h-9 rounded-full bg-mosque/10 overflow-hidden border border-mosque/20">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhLuM9qNltZNxgIWPtC3dVxQ_JLFKXYB9d_klGFux_2JVOGtRlbV4GvpvdT4wqpsueZnXFQhKJe9MGGvM6rXQX15iv80mbEKxjmy4X14AZRqvp573ZlKYDN9bAb0ka7B-g5mkOCP6nRuKC9QsO02JVq6gqZeAo3-7dUurVhhgPJGeuL0Gk2Cp3Wnu5mVlUtpajB2wtx8uMoytbh78i9RmHYtJg52ZELl9XdIC9f5Kix_lFMFoi6Ru61ARrEGIrvgvz4ViiKhufTns"/>
+</div>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+<div class="lg:col-span-8 space-y-4">
+<div class="relative aspect-[16/10] overflow-hidden rounded-xl shadow-sm group">
+<img alt="Modern luxury home exterior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern luxury house exterior with pool" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjNDU9iE4zwPuWeg-CjIrLI-87GF24_LgOggcXT0vmUYfMx2q1dJAheiqWqVN-39uiwyLKEfP18FsG1vtUyAPX902OhGEfM4clcQiDsJW7MBbc_BoMtZXtqIeFKIfkHnkIPwmFbQg8Eaan6ULV99T8AUVUuKsro0HoTMrIaxw5pp1uSuQlF8X5Dait4US1W4vmyZnVioXbFnCoaOOZ0LPorb0rVGAIQd9reWcpqq27C0oO4ltnsCTHIcjIm0xp-2qVbRJSIZzWPv0"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-mosque text-white text-xs font-medium px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Premium</span>
+<span class="bg-white/90 backdrop-blur text-nordic text-xs font-medium px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">New</span>
+</div>
+<button class="absolute bottom-4 right-4 bg-white/90 hover:bg-white text-nordic px-4 py-2 rounded-lg text-sm font-medium shadow-lg backdrop-blur transition-all flex items-center gap-2">
+<span class="material-icons text-sm">grid_view</span>
+                    View All Photos
+                </button>
+</div>
+<div class="flex gap-4 overflow-x-auto scrollbar-hide pb-2 snap-x">
+<div class="flex-none w-48 aspect-[4/3] rounded-lg overflow-hidden cursor-pointer ring-2 ring-mosque ring-offset-2 ring-offset-clear-day snap-start">
+<img alt="Exterior" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvpJBMaiXUL25hHYwLa_0R6dPhLLM1EuhEt-AVtOy8qSnEi9IcA_RzD5s5ThawY3XG2qw8h4kPqvfP18EY1E5vgA8fs6v7RefCMJ1gY8Gt4uyXGJ85-lcIvL18v8Nlc-U-VOwn1h54yjjg4-KXHt1N5DfuTkQUBdldSELRZeJ6zuZ087NCJ7dDIDaXKJpPgulmd6JC6zD1-Kq00Sb4VXIhVR3IQ1Hd8S6xZkd17QvMHSNqbtKG849PRqHZX3nKLHEWYWWPvbL5_Gs"/>
+</div>
+<div class="flex-none w-48 aspect-[4/3] rounded-lg overflow-hidden cursor-pointer opacity-70 hover:opacity-100 transition-opacity snap-start">
+<img alt="Living Room" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbloTFAmeq6ugmfkwyqn3NMGn11PMk4FU0EIHRHvfYB8nw_-iH5TLps5ig3zipLPoKVZZKO8fOvEVJIwp3MQ9wrS4Dzhgw6ypUDhsycDc-YsboVBbRrXxKOYl-77zNHX9E4hynYyJfVVzXn7ldtURk3Ij3pHIMwqzfDdUxyhYaIJe5dRYa0JN5RpHbPNaV33TcM-IoYW11wNUCKkivtfgC3tk7hkKa3gue7ZTjLhR1ZOE_A1MvMZ3rgBxGDg-HFASH4YP6jI3rwMM"/>
+</div>
+<div class="flex-none w-48 aspect-[4/3] rounded-lg overflow-hidden cursor-pointer opacity-70 hover:opacity-100 transition-opacity snap-start">
+<img alt="Kitchen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRCEooMTK0GZV_7SdAorgeIN1pNz3R9YsLv-2pv39FOje7BUWCWPnKOSA1f6rlYcw7IoJ8NxUp4OU-MAk5_ucnykEtps56-kR6DtQ9JgLlCNyiuazO87fy-xCtXVNROT9kquBZ2JUvUtNGRwWiBaK1DnXOHSxp3ELHbLK8MNS-Ht3Gw8dXgNbya4bZiHZ7C-YnCJfwPjX25zrrQypfbiJsS8jjxFq3--uC264Zbhxp8XCsqDid3BIaJ8RdNMRze6lVvpg49N7Z0tI"/>
+</div>
+<div class="flex-none w-48 aspect-[4/3] rounded-lg overflow-hidden cursor-pointer opacity-70 hover:opacity-100 transition-opacity snap-start">
+<img alt="Master Bedroom" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk_c2n3UBtDQJ-NNLPp9wHCUtPuJTKQi4jnndp2ZNKTRfxtmV85MELPvVecn7Ef74j23fC3l08ZwEbHr70k5C1eHlVG8Pj-K0GWve-DoShWQNa5VGFhBad_Vtlxlu_u22wpBT3475EVHpmhcfwY2FekfCxqUrc_fGSBlHLcKIZ8XsNyHpAPUqUD2n10H86tm9E1nexgYeFUXpLsgB-FRTtya2tTZZ8kTJ-i0Mv6kWLi-LJgvYuYsN2lB0jZi0Q7xxJe6O1M-vA9eg"/>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 relative">
+<div class="sticky top-28 space-y-6">
+<div class="bg-white p-6 rounded-xl shadow-sm border border-mosque/5">
+<div class="mb-4">
+<h1 class="text-4xl font-display font-light text-nordic mb-2">$1,250,000</h1>
+<p class="text-nordic/60 font-medium flex items-center gap-1">
+<span class="material-icons text-mosque text-sm">location_on</span>
+                            1234 Serenity Lane, Palo Alto, CA
+                        </p>
+</div>
+<div class="h-px bg-slate-100 my-6"></div>
+<div class="flex items-center gap-4 mb-6">
+<img alt="Sarah Jenkins" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4TxUmdQRb2VMjuaNxLEwLorv_dgHzoET2_wL5toSvew6nhtziaR3DX-U69DBN7J74yO6oKokpw8tqEFutJf13MeXghCy7FwZuAxnoJel6FYcKeCRUVinpZtrNnkZvXd-MY5_2MAtRD7JP5BieHixfCaeAPW04jm-y-nvF3HIrwcZ_HRDk_MrNP5WiPV3u9zNrEgM-SQoWGh4xLVSV444aZAbVl03mjjsW5WBpIeodCyqJxprTDp6Q157D06VxcdUSCf-l9UKQT-w"/>
+<div>
+<h3 class="font-semibold text-nordic">Sarah Jenkins</h3>
+<div class="flex items-center gap-1 text-xs text-mosque font-medium">
+<span class="material-icons text-[14px]">star</span>
+<span>Top Rated Agent</span>
+</div>
+</div>
+<div class="ml-auto flex gap-2">
+<button class="p-2 rounded-full bg-mosque/10 text-mosque hover:bg-mosque hover:text-white transition-colors">
+<span class="material-icons text-sm">chat</span>
+</button>
+<button class="p-2 rounded-full bg-mosque/10 text-mosque hover:bg-mosque hover:text-white transition-colors">
+<span class="material-icons text-sm">call</span>
+</button>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-mosque hover:bg-primary-hover text-white py-4 px-6 rounded-lg font-medium transition-all shadow-lg shadow-mosque/20 flex items-center justify-center gap-2 group">
+<span class="material-icons text-xl group-hover:scale-110 transition-transform">calendar_today</span>
+                            Schedule Visit
+                        </button>
+<button class="w-full bg-transparent border border-nordic/10 hover:border-mosque text-nordic/80 hover:text-mosque py-4 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
+<span class="material-icons text-xl">mail_outline</span>
+                            Contact Agent
+                        </button>
+</div>
+</div>
+<div class="bg-white p-2 rounded-xl shadow-sm border border-mosque/5">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100">
+<img alt="Map location" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAam7l6Iva-Ueed4N1BxrVb5SqFJUVl9pnGf_zDG5JYhZmJCe3hLYttkVA-Jg46VljNevhZK7LCxoMpRmKjS0pT1uk0x_WAT5FFVpphw6yGYjroXFGybUkSYCymind4Z7fzrdob5j_VR4DfhQL6Lej-gMQZCuLjZrOjYt0KN97oLy0gZVOIyV1o7woH1F8aOvLzpKUPzcof0KmZdYl7I1uq25G31zdQYTwnQCXvWAQ0Snu1uEKYLQZg4uV4OsqzeOtSu_KCt36ytmw"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-8 h-8 bg-mosque rounded-full border-4 border-white shadow-lg animate-bounce flex items-center justify-center">
+<span class="material-icons text-white text-sm">home</span>
+</div>
+</div>
+<a class="absolute bottom-2 right-2 bg-white/90 text-xs font-medium px-2 py-1 rounded shadow-sm text-nordic hover:text-mosque" href="#">View on Map</a>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 lg:row-start-2 -mt-8 space-y-8">
+<div class="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
+<h2 class="text-lg font-semibold mb-6 text-nordic">Property Features</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
+<span class="material-icons text-mosque text-2xl mb-2">square_foot</span>
+<span class="text-xl font-bold text-nordic">240</span>
+<span class="text-xs uppercase tracking-wider text-nordic/50">Square Meters</span>
+</div>
+<div class="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
+<span class="material-icons text-mosque text-2xl mb-2">bed</span>
+<span class="text-xl font-bold text-nordic">4</span>
+<span class="text-xs uppercase tracking-wider text-nordic/50">Bedrooms</span>
+</div>
+<div class="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
+<span class="material-icons text-mosque text-2xl mb-2">shower</span>
+<span class="text-xl font-bold text-nordic">3</span>
+<span class="text-xs uppercase tracking-wider text-nordic/50">Bathrooms</span>
+</div>
+<div class="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
+<span class="material-icons text-mosque text-2xl mb-2">directions_car</span>
+<span class="text-xl font-bold text-nordic">2</span>
+<span class="text-xs uppercase tracking-wider text-nordic/50">Garage</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
+<h2 class="text-lg font-semibold mb-4 text-nordic">About this home</h2>
+<div class="prose prose-slate max-w-none text-nordic/70 leading-relaxed">
+<p class="mb-4">
+                        Experience modern luxury in this architecturally stunning home located in the heart of Palo Alto. Designed with an emphasis on indoor-outdoor living, the residence features floor-to-ceiling glass walls that flood the interiors with natural light.
+                    </p>
+<p>
+                        The open-concept kitchen is equipped with top-of-the-line appliances and custom cabinetry, perfect for culinary enthusiasts. Retreat to the primary suite, a sanctuary of relaxation with a spa-inspired bath and private balcony.
+                    </p>
+</div>
+<button class="mt-4 text-mosque font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                    Read more
+                    <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
+<h2 class="text-lg font-semibold mb-6 text-nordic">Amenities</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
+<div class="flex items-center gap-3 text-nordic/70">
+<span class="material-icons text-mosque/60 text-sm">check_circle</span>
+<span>Smart Home System</span>
+</div>
+<div class="flex items-center gap-3 text-nordic/70">
+<span class="material-icons text-mosque/60 text-sm">check_circle</span>
+<span>Swimming Pool</span>
+</div>
+<div class="flex items-center gap-3 text-nordic/70">
+<span class="material-icons text-mosque/60 text-sm">check_circle</span>
+<span>Central Heating &amp; Cooling</span>
+</div>
+<div class="flex items-center gap-3 text-nordic/70">
+<span class="material-icons text-mosque/60 text-sm">check_circle</span>
+<span>Electric Vehicle Charging</span>
+</div>
+<div class="flex items-center gap-3 text-nordic/70">
+<span class="material-icons text-mosque/60 text-sm">check_circle</span>
+<span>Private Gym</span>
+</div>
+<div class="flex items-center gap-3 text-nordic/70">
+<span class="material-icons text-mosque/60 text-sm">check_circle</span>
+<span>Wine Cellar</span>
+</div>
+</div>
+</div>
+<div class="bg-mosque/5 p-6 rounded-xl border border-mosque/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-white rounded-full text-mosque shadow-sm">
+<span class="material-icons">calculate</span>
+</div>
+<div>
+<h3 class="font-semibold text-nordic">Estimated Payment</h3>
+<p class="text-sm text-nordic/60">Starting from <strong class="text-mosque">$5,430/mo</strong> with 20% down</p>
+</div>
+</div>
+<button class="whitespace-nowrap px-4 py-2 bg-white border border-nordic/10 rounded-lg text-sm font-semibold hover:border-mosque transition-colors text-nordic">
+                    Calculate Mortgage
+                </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-white border-t border-slate-200 mt-12 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-sm text-nordic/50">
+            © 2023 LuxeEstate Inc. All rights reserved.
+        </div>
+<div class="flex gap-6">
+<a class="text-nordic/40 hover:text-mosque transition-colors" href="#">
+<span class="sr-only">Facebook</span>
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg>
+</a>
+<a class="text-nordic/40 hover:text-mosque transition-colors" href="#">
+<span class="sr-only">Twitter</span>
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+
+</body></html>

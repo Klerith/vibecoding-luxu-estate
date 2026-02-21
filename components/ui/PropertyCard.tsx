@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Property } from '@/types/property';
+import Link from 'next/link';
 
 interface PropertyCardProps {
   property: Property;
@@ -7,7 +8,10 @@ interface PropertyCardProps {
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
   return (
-    <article className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col">
+    <Link
+      href={`/properties/${property.slug || property.id}`}
+      className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col"
+    >
       {/* Image Container */}
       <div className="relative aspect-4/3 overflow-hidden">
         <Image
@@ -70,7 +74,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           </div>
         </div>
       </div>
-    </article>
+    </Link>
   );
 };
 

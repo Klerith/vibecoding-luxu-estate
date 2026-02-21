@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Collection } from '@/data/mockData';
+import Link from 'next/link';
 
 interface CollectionCardProps {
   collection: Collection;
@@ -7,7 +8,10 @@ interface CollectionCardProps {
 
 const CollectionCard = ({ collection }: CollectionCardProps) => {
   return (
-    <div className="group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer">
+    <Link
+      href={`/properties/${collection.slug || collection.id}`}
+      className="block group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer"
+    >
       {/* Image Container */}
       <div className="aspect-4/3 w-full overflow-hidden relative">
         <Image
@@ -74,7 +78,7 @@ const CollectionCard = ({ collection }: CollectionCardProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
