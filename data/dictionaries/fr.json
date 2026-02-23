@@ -1,0 +1,28 @@
+{
+  "navbar": {
+    "buy": "Acheter",
+    "rent": "Louer",
+    "sell": "Vendre",
+    "saved_homes": "Sauvegardés"
+  },
+  "hero": {
+    "title": "Trouvez la maison de vos rêves",
+    "subtitle": "Découvrez les meilleures propriétés sur le marché",
+    "search_placeholder": "Rechercher par emplacement...",
+    "search_button": "Rechercher"
+  },
+  "common": {
+    "featured_properties": "Propriétés en Vedette",
+    "new_in_market": "Nouveau sur le Marché",
+    "view_details": "Voir les Détails",
+    "any_type": "Tout Type",
+    "property_types": {
+      "villa": "Villa",
+      "house": "Maison",
+      "apartment": "Appartement",
+      "condo": "Condo"
+    },
+    "beds": "Lits",
+    "baths": "Bains"
+  }
+}

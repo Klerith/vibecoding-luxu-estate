@@ -1,0 +1,28 @@
+{
+  "navbar": {
+    "buy": "Comprar",
+    "rent": "Alquilar",
+    "sell": "Vender",
+    "saved_homes": "Guardados"
+  },
+  "hero": {
+    "title": "Encuentra la casa de tus sueños",
+    "subtitle": "Descubre las mejores propiedades en el mercado",
+    "search_placeholder": "Buscar por ubicación...",
+    "search_button": "Buscar"
+  },
+  "common": {
+    "featured_properties": "Propiedades Destacadas",
+    "new_in_market": "Nuevas en el Mercado",
+    "view_details": "Ver Detalles",
+    "any_type": "Cualquier Tipo",
+    "property_types": {
+      "villa": "Villa",
+      "house": "Casa",
+      "apartment": "Apartamento",
+      "condo": "Condominio"
+    },
+    "beds": "Camas",
+    "baths": "Baños"
+  }
+}

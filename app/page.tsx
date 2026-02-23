@@ -3,6 +3,8 @@ import Hero from '@/components/Hero';
 import FeaturedCollection from '@/components/FeaturedCollection';
 import NewInMarket from '@/components/NewInMarket';
 import { createClient } from '@/lib/supabase/server';
+import { cookies } from 'next/headers';
+import { getDictionary } from '@/lib/i18n';
 
 const PAGE_SIZE = 8;
 
@@ -19,6 +21,10 @@ interface HomePageProps {
 }
 
 export default async function Home({ searchParams }: HomePageProps) {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get('NEXT_LOCALE')?.value || 'es';
+  const dict = getDictionary(locale);
+
   const { page, location, minPrice, maxPrice, type, beds, baths } =
     await searchParams;
   const currentPage = Math.max(1, parseInt(page ?? '1', 10));
@@ -66,9 +72,10 @@ export default async function Home({ searchParams }: HomePageProps) {
     <>
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <Hero />
-        {!isFilterActive && <FeaturedCollection />}
+        <Hero dict={dict.hero} />
+        {!isFilterActive && <FeaturedCollection dict={dict.common} />}
         <NewInMarket
+          dict={dict.common}
           properties={properties ?? []}
           totalCount={count ?? 0}
           currentPage={currentPage}

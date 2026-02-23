@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import { getDictionary } from '@/lib/i18n';
+import LanguageSelector from './LanguageSelector';
 
-const Navbar = () => {
+const Navbar = async () => {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get('NEXT_LOCALE')?.value || 'es';
+  const dict = getDictionary(locale);
+
   return (
     <nav className="sticky top-0 z-50 bg-clear-day/95 backdrop-blur-md border-b border-nordic/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,25 +34,25 @@ const Navbar = () => {
               href="#"
               className="text-mosque font-medium text-sm border-b-2 border-mosque px-1 py-1"
             >
-              Buy
+              {dict.navbar.buy}
             </Link>
             <Link
               href="#"
               className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all"
             >
-              Rent
+              {dict.navbar.rent}
             </Link>
             <Link
               href="#"
               className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all"
             >
-              Sell
+              {dict.navbar.sell}
             </Link>
             <Link
               href="#"
               className="text-nordic/70 hover:text-nordic font-medium text-sm hover:border-b-2 hover:border-nordic/20 px-1 py-1 transition-all"
             >
-              Saved Homes
+              {dict.navbar.saved_homes}
             </Link>
           </div>
 
@@ -72,6 +79,8 @@ const Navbar = () => {
                 />
               </div>
             </button>
+
+            <LanguageSelector currentLocale={locale} />
           </div>
         </div>
       </div>
@@ -83,25 +92,25 @@ const Navbar = () => {
             href="#"
             className="block px-3 py-2 rounded-md text-base font-medium text-mosque bg-mosque/10"
           >
-            Buy
+            {dict.navbar.buy}
           </Link>
           <Link
             href="#"
             className="block px-3 py-2 rounded-md text-base font-medium text-nordic hover:bg-black/5"
           >
-            Rent
+            {dict.navbar.rent}
           </Link>
           <Link
             href="#"
             className="block px-3 py-2 rounded-md text-base font-medium text-nordic hover:bg-black/5"
           >
-            Sell
+            {dict.navbar.sell}
           </Link>
           <Link
             href="#"
             className="block px-3 py-2 rounded-md text-base font-medium text-nordic hover:bg-black/5"
           >
-            Saved Homes
+            {dict.navbar.saved_homes}
           </Link>
         </div>
       </div>

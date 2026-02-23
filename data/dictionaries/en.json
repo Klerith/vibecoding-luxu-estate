@@ -1,0 +1,28 @@
+{
+  "navbar": {
+    "buy": "Buy",
+    "rent": "Rent",
+    "sell": "Sell",
+    "saved_homes": "Saved Homes"
+  },
+  "hero": {
+    "title": "Find Your Dream Home",
+    "subtitle": "Discover the best properties in the market",
+    "search_placeholder": "Search by location...",
+    "search_button": "Search"
+  },
+  "common": {
+    "featured_properties": "Featured Properties",
+    "new_in_market": "New in Market",
+    "view_details": "View Details",
+    "any_type": "Any Type",
+    "property_types": {
+      "villa": "Villa",
+      "house": "House",
+      "apartment": "Apartment",
+      "condo": "Condo"
+    },
+    "beds": "Beds",
+    "baths": "Baths"
+  }
+}

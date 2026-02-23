@@ -3,7 +3,11 @@ import { Collection } from '@/data/mockData';
 import CollectionCard from './ui/CollectionCard';
 import { createClient } from '@/lib/supabase/server';
 
-const FeaturedCollection = async () => {
+const FeaturedCollection = async ({
+  dict,
+}: {
+  dict: Record<string, string>;
+}) => {
   const supabase = await createClient();
 
   const { data: properties } = await supabase
@@ -30,7 +34,7 @@ const FeaturedCollection = async () => {
       <div className="flex items-end justify-between mb-8">
         <div>
           <h2 className="text-2xl font-light text-nordic">
-            Featured Collections
+            {dict.featured_properties}
           </h2>
           <p className="text-nordic-muted mt-1 text-sm">
             Curated properties for the discerning eye.

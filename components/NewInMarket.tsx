@@ -3,6 +3,7 @@ import Pagination from './Pagination';
 import { Property } from '@/types/property';
 
 interface NewInMarketProps {
+  dict: Record<string, any>;
   properties: Property[];
   totalCount: number;
   currentPage: number;
@@ -10,6 +11,7 @@ interface NewInMarketProps {
 }
 
 const NewInMarket = ({
+  dict,
   properties,
   totalCount,
   currentPage,
@@ -21,7 +23,9 @@ const NewInMarket = ({
     <section>
       <div className="flex items-end justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-light text-nordic">New in Market</h2>
+          <h2 className="text-2xl font-light text-nordic">
+            {dict.new_in_market}
+          </h2>
           <p className="text-nordic-muted mt-1 text-sm">
             Fresh opportunities added this week.
           </p>
