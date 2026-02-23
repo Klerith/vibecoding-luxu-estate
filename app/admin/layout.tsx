@@ -1,6 +1,5 @@
 import { type ReactNode } from 'react';
 import Link from 'next/link';
-import { Home, Users, Building } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
@@ -19,49 +18,74 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r">
-        <div className="h-full flex flex-col pt-5 pb-4 overflow-y-auto">
-          <div className="flex items-center shrink-0 px-4 mb-6">
-            <span className="text-xl font-semibold text-gray-900">
-              Admin Dashboard
-            </span>
-          </div>
-          <nav className="mt-5 flex-1 px-2 space-y-1">
-            <Link
-              href="/admin/properties"
-              className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            >
-              <Building className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
-              Properties
+    <div className="bg-clear-day text-nordic font-display min-h-screen flex flex-col antialiased">
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 bg-white border-b border-nordic/5 px-4 sm:px-6 lg:px-8 backdrop-blur-md bg-opacity-90">
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
+          <div className="flex items-center gap-12">
+            <Link href="/" className="shrink-0 flex items-center gap-2">
+              <span className="material-icons text-mosque text-2xl">
+                apartment
+              </span>
+              <span className="font-bold text-lg tracking-tight text-nordic">
+                LuxeEstate
+              </span>
             </Link>
-            <Link
-              href="/admin/users"
-              className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            >
-              <Users className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
-              Users & Roles
-            </Link>
-          </nav>
-          <div className="mt-auto px-4 py-4 space-y-4">
-            <div className="text-sm text-gray-500">
-              Logged in as: <br />
-              <span className="font-medium">{user.email}</span>
+            <div className="hidden md:flex space-x-8">
+              <Link
+                href="/admin"
+                className="text-nordic/60 hover:text-mosque px-1 py-2 text-sm font-medium transition-colors"
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/admin/properties"
+                className="text-nordic/60 hover:text-mosque px-1 py-2 text-sm font-medium transition-colors"
+              >
+                Properties
+              </Link>
+              <Link
+                href="/admin/users"
+                className="text-nordic/60 hover:text-mosque px-1 py-2 text-sm font-medium transition-colors"
+              >
+                Users
+              </Link>
             </div>
-            <Link
-              href="/"
-              className="group flex items-center text-sm font-medium text-gray-600 hover:text-gray-900"
-            >
-              <Home className="mr-3 h-5 w-5 text-gray-400" />
-              Back to Site
-            </Link>
+          </div>
+          <div className="flex items-center gap-5">
+            <button className="text-nordic/60 hover:text-mosque transition-colors relative">
+              <span className="material-icons text-xl">notifications</span>
+              <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+            </button>
+            <div className="flex items-center gap-3 pl-4 border-l border-nordic/10">
+              <div className="hidden sm:flex flex-col items-end">
+                <span className="text-sm font-semibold text-nordic">
+                  {user.email}
+                </span>
+                <span className="text-xs text-nordic/60">Administrator</span>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-nordic/10 flex items-center justify-center overflow-hidden border border-nordic/10">
+                <span className="material-icons text-nordic/60 text-lg">
+                  person
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-      </aside>
+      </nav>
 
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto w-full">{children}</main>
+      <div className="grow flex flex-col w-full">{children}</div>
+
+      {/* Footer */}
+      <footer className="mt-auto border-t border-nordic/5 bg-clear-day py-6 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <p className="text-center text-sm text-nordic/60 w-full md:text-left md:w-auto">
+            © {new Date().getFullYear()} LuxeEstate Properties. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

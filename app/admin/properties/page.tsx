@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
-import { CheckCircle2, XCircle, Edit } from 'lucide-react';
 
 export default async function AdminPropertiesPage() {
   const supabase = await createClient();
@@ -13,119 +12,176 @@ export default async function AdminPropertiesPage() {
     return <div className="p-8 text-red-500">Error loading properties</div>;
   }
 
+  const activePropertiesCount =
+    properties?.filter((p) => p.is_featured)?.length || 0;
+  const pendingCount = 0;
+
   return (
-    <div className="p-8">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-2xl font-semibold text-gray-900">Properties</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            A list of all properties in your portfolio including their title,
-            location, price, and status.
+    <main className="grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      {/* Header Section */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-nordic tracking-tight">
+            My Properties
+          </h1>
+          <p className="text-nordic/60 mt-1 text-sm">
+            Manage your portfolio and track performance.
           </p>
         </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <div className="flex items-center gap-3">
+          <button className="bg-white border border-nordic/10 text-nordic hover:bg-gray-50 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm inline-flex items-center gap-2">
+            <span className="material-icons text-base">filter_list</span> Filter
+          </button>
           <Link
             href="/"
-            className="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            className="bg-mosque hover:bg-mosque/90 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-mosque/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2"
           >
-            Add Property
+            <span className="material-icons text-base">add</span> Add New
+            Property
           </Link>
         </div>
       </div>
-      <div className="mt-8 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Title
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Location
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Price
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Type
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Featured
-                    </th>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
-                      <span className="sr-only">Edit</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {properties?.map((property) => (
-                    <tr key={property.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        {property.title}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {property.location}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        ${property.price.toLocaleString()}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 capitalize">
-                        {property.type}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {property.is_featured ? (
-                          <CheckCircle2 className="h-5 w-5 text-green-500" />
-                        ) : (
-                          <XCircle className="h-5 w-5 text-gray-300" />
-                        )}
-                      </td>
-                      <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <Link
-                          href={`/properties/${property.slug}`}
-                          className="text-blue-600 hover:text-blue-900"
-                        >
-                          <Edit className="h-4 w-4 inline-block" />
-                          <span className="sr-only">, {property.title}</span>
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                  {properties?.length === 0 && (
-                    <tr>
-                      <td
-                        colSpan={6}
-                        className="py-8 text-center text-sm text-gray-500"
-                      >
-                        No properties found.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white p-5 rounded-xl border border-nordic/10 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-nordic/60">Total Listings</p>
+            <p className="text-2xl font-bold text-nordic mt-1">
+              {properties?.length || 0}
+            </p>
+          </div>
+          <div className="h-10 w-10 rounded-full bg-mosque/10 flex items-center justify-center text-mosque">
+            <span className="material-icons">apartment</span>
+          </div>
+        </div>
+        <div className="bg-white p-5 rounded-xl border border-nordic/10 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-nordic/60">
+              Active Properties
+            </p>
+            <p className="text-2xl font-bold text-nordic mt-1">
+              {activePropertiesCount}
+            </p>
+          </div>
+          <div className="h-10 w-10 rounded-full bg-hint-of-green flex items-center justify-center text-mosque">
+            <span className="material-icons">check_circle</span>
+          </div>
+        </div>
+        <div className="bg-white p-5 rounded-xl border border-nordic/10 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-nordic/60">Pending Sale</p>
+            <p className="text-2xl font-bold text-nordic mt-1">
+              {pendingCount}
+            </p>
+          </div>
+          <div className="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+            <span className="material-icons">pending</span>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Property List Container */}
+      <div className="bg-white rounded-xl shadow-sm border border-nordic/10 overflow-hidden">
+        {/* Table Header */}
+        <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50/50 border-b border-nordic/10 text-xs font-semibold text-nordic/60 uppercase tracking-wider">
+          <div className="col-span-6">Property Details</div>
+          <div className="col-span-2">Price</div>
+          <div className="col-span-2">Status</div>
+          <div className="col-span-2 text-right">Actions</div>
+        </div>
+
+        {properties?.map((property) => (
+          <div
+            key={property.id}
+            className="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-nordic/10 hover:bg-clear-day transition-colors items-center"
+          >
+            {/* Property Details */}
+            <div className="col-span-12 md:col-span-6 flex gap-4 items-center">
+              <div className="relative h-20 w-28 shrink-0 rounded-lg overflow-hidden bg-gray-200">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt={property.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  src={
+                    property.images?.[0] ||
+                    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400'
+                  }
+                />
+              </div>
+              <div className="overflow-hidden">
+                <Link href={`/properties/${property.slug}`}>
+                  <h3 className="text-lg font-bold text-nordic group-hover:text-mosque transition-colors cursor-pointer truncate">
+                    {property.title}
+                  </h3>
+                </Link>
+                <p className="text-sm text-nordic/60 truncate">
+                  {property.location}
+                </p>
+                <div className="flex items-center gap-3 mt-1.5 text-xs text-nordic/50">
+                  <span className="flex items-center gap-1">
+                    <span className="material-icons text-[14px]">bed</span>{' '}
+                    {property.beds || 0} Beds
+                  </span>
+                  <span className="w-1 h-1 rounded-full bg-nordic/20"></span>
+                  <span className="flex items-center gap-1">
+                    <span className="material-icons text-[14px]">bathtub</span>{' '}
+                    {property.baths || 0} Baths
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Price */}
+            <div className="col-span-6 md:col-span-2">
+              <div className="text-base font-semibold text-nordic">
+                ${property.price.toLocaleString()}
+              </div>
+              <div className="text-xs text-nordic/50 capitalize">
+                {property.type}
+              </div>
+            </div>
+
+            {/* Status */}
+            <div className="col-span-6 md:col-span-2">
+              {property.is_featured ? (
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-hint-of-green text-mosque border border-mosque/10">
+                  <span className="w-1.5 h-1.5 rounded-full bg-mosque mr-1.5"></span>
+                  Featured
+                </span>
+              ) : (
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-500 mr-1.5"></span>
+                  Standard
+                </span>
+              )}
+            </div>
+
+            {/* Actions */}
+            <div className="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
+              <Link
+                href={`/properties/${property.slug}`}
+                className="p-2 rounded-lg text-nordic/40 hover:text-mosque hover:bg-hint-of-green/50 transition-all tooltip-trigger"
+                title="Edit Property"
+              >
+                <span className="material-icons text-xl">edit</span>
+              </Link>
+              <button
+                className="p-2 rounded-lg text-nordic/40 hover:text-red-600 hover:bg-red-50 transition-all tooltip-trigger"
+                title="Delete Property"
+              >
+                <span className="material-icons text-xl">delete_outline</span>
+              </button>
+            </div>
+          </div>
+        ))}
+
+        {(!properties || properties.length === 0) && (
+          <div className="text-center py-12 text-sm text-nordic/50">
+            No properties found.
+          </div>
+        )}
+      </div>
+    </main>
   );
 }
