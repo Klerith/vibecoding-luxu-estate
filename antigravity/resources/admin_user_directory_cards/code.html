@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin User Directory - Premium Real Estate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+    @font-face {
+        font-family: 'SF Pro Display';
+        src: url('https://fonts.cdnfonts.com/s/16474/SFProDisplay-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'SF Pro Display';
+        src: url('https://fonts.cdnfonts.com/s/16474/SFProDisplay-Medium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'SF Pro Display';
+        src: url('https://fonts.cdnfonts.com/s/16474/SFProDisplay-Bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+    }
+</style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#006655", // Mosque
+                        "primary-dark": "#004d40",
+                        "background-light": "#EEF6F6", // Clear Day
+                        "background-dark": "#0f2320",
+                        "nordic": "#19322F", // Nordic Text
+                        "active-green": "#D9ECC8", // Hint of Green
+                        "card-white": "#FFFFFF",
+                    },
+                    fontFamily: {
+                        "display": ["SF Pro Display", "Inter", "sans-serif"],
+                        "body": ["SF Pro Display", "Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "md": "0.375rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(25, 50, 47, 0.05)',
+                        'dropdown': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }.user-card {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-nordic dark:text-gray-100 font-display min-h-screen flex flex-col antialiased">
+<nav class="bg-card-white border-b border-nordic/5 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto flex items-center justify-between h-16">
+<div class="flex items-center gap-12">
+<div class="flex-shrink-0 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">apartment</span>
+<span class="font-bold text-lg text-nordic tracking-tight">LuxeEstate</span>
+</div>
+<div class="hidden md:flex space-x-8">
+<a class="text-nordic/60 hover:text-primary px-1 py-2 text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-nordic/60 hover:text-primary px-1 py-2 text-sm font-medium transition-colors" href="#">Listings</a>
+<a class="text-primary border-b-2 border-primary px-1 py-2 text-sm font-medium" href="#">Users</a>
+<a class="text-nordic/60 hover:text-primary px-1 py-2 text-sm font-medium transition-colors" href="#">Inquiries</a>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="text-nordic/60 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">search</span>
+</button>
+<button class="text-nordic/60 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+</button>
+<button class="flex items-center gap-2 ml-2">
+<div class="h-8 w-8 rounded-full bg-nordic/10 flex items-center justify-center overflow-hidden border border-nordic/10">
+<span class="material-symbols-outlined text-nordic/60 text-lg">person</span>
+</div>
+</button>
+</div>
+</div>
+</nav>
+<header class="w-full pt-8 pb-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div>
+<h1 class="text-3xl font-bold tracking-tight text-nordic dark:text-white">User Directory</h1>
+<p class="text-nordic/60 dark:text-gray-400 mt-1 text-sm">Manage user access and roles for your properties.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+<div class="relative group w-full md:w-80">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons text-nordic/40 group-focus-within:text-primary text-xl">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-white dark:bg-gray-800 text-nordic dark:text-white shadow-soft placeholder-nordic/30 focus:ring-2 focus:ring-primary focus:bg-white transition-all text-sm" placeholder="Search by name, email..." type="text"/>
+</div>
+<button class="inline-flex items-center justify-center px-4 py-2.5 border border-primary text-sm font-medium rounded-lg text-primary bg-transparent hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors whitespace-nowrap">
+<span class="material-icons text-lg mr-2">add</span>
+                    Add User
+                </button>
+</div>
+</div>
+<div class="mt-8 flex gap-6 border-b border-nordic/10 overflow-x-auto">
+<button class="pb-3 text-sm font-semibold text-primary border-b-2 border-primary">All Users</button>
+<button class="pb-3 text-sm font-medium text-nordic/60 hover:text-nordic transition-colors">Agents</button>
+<button class="pb-3 text-sm font-medium text-nordic/60 hover:text-nordic transition-colors">Brokers</button>
+<button class="pb-3 text-sm font-medium text-nordic/60 hover:text-nordic transition-colors">Admins</button>
+</div>
+</header>
+<main class="flex-grow px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pb-12 space-y-4">
+<div class="hidden md:grid grid-cols-12 gap-4 px-6 text-xs font-semibold uppercase tracking-wider text-nordic/50 mb-2">
+<div class="col-span-4">User Details</div>
+<div class="col-span-3">Role &amp; Status</div>
+<div class="col-span-3">Performance</div>
+<div class="col-span-2 text-right">Actions</div>
+</div>
+<div class="user-card group relative bg-active-green dark:bg-primary/20 rounded-xl p-5 shadow-sm border border-transparent hover:shadow-soft flex flex-col md:grid md:grid-cols-12 gap-4 items-center">
+<div class="col-span-12 md:col-span-4 flex items-center w-full">
+<div class="relative flex-shrink-0">
+<img alt="Portrait of Sarah Miller" class="h-12 w-12 rounded-full object-cover border-2 border-white dark:border-primary" data-alt="Portrait of Sarah Miller" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC56qX3A4ZIRCJqxha17327kptmQpANrrIT6CLj09DTQ7ZLjB0fF9cMlC1MCJKAs3hr5oUDilNrCcdzUdLAZtwX25YQblIBzVpUSa4XfyFc_WJDGvW0T1svVr884aNmze31Cl_2UkKik03EROGXyke1i6PuTAZaAtf8yMN8xLPJIAdQ5Gc1m_SqkCpADlwXPZ8fL-BWzj4Ck3PpZ1GjAGsyq9Ul9L3SmH_UnJzI-NbipFCmtQI2JJiB0TiUhogRjIBNn8TCUkubVhs"/>
+<span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-400 ring-2 ring-white"></span>
+</div>
+<div class="ml-4 overflow-hidden">
+<div class="text-sm font-bold text-nordic dark:text-white truncate">Sarah Miller</div>
+<div class="text-xs text-nordic/70 dark:text-gray-300 truncate">sarah.miller@luxuryestates.com</div>
+<div class="mt-1 text-[10px] px-2 py-0.5 inline-block bg-white/50 rounded text-nordic/60">ID: #USR-2941</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full flex items-center justify-between md:justify-start gap-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-primary/10 text-primary">
+                    Senior Broker
+                </span>
+<div class="flex items-center text-xs text-nordic/60 dark:text-gray-400">
+<span class="material-icons text-[14px] mr-1 text-primary">check_circle</span>
+                    Active
+                </div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full grid grid-cols-2 gap-4">
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/50">Properties</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">24</div>
+</div>
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/50">Sales (YTD)</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">$4.2M</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-2 w-full flex justify-end relative">
+<button class="inline-flex items-center px-4 py-2 border border-nordic/10 bg-white dark:bg-gray-800 shadow-sm text-xs font-medium rounded-lg text-nordic hover:bg-nordic hover:text-white focus:outline-none transition-colors w-full md:w-auto justify-center">
+                    Change Role
+                    <span class="material-icons text-[16px] ml-2">expand_more</span>
+</button>
+</div>
+</div>
+<div class="user-card group relative bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 hover:bg-active-green dark:hover:bg-primary/20 flex flex-col md:grid md:grid-cols-12 gap-4 items-center">
+<div class="col-span-12 md:col-span-4 flex items-center w-full">
+<div class="relative flex-shrink-0">
+<img alt="Portrait of Marcus Chen" class="h-12 w-12 rounded-full object-cover" data-alt="Portrait of Marcus Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6y5hdg1R7gLFSihyqty_LGTd8uQTZHpyo_det0XoV6ak0U5H9xxuTlfFTXPP3vX9dhpeIETDGBcowSSiDyHVTXQm_0Xv8KXRj-n2PLGHHBlmSsYSxlZPErAGQSycUYUlDT1FNqac9hxwpfwQ3MjO4tdj7q9Pmb8WHgzBaOMain4vzaZbThFi3Hg9-qkhofOnAi7hJ1JD3EgK6Zu5iWLE8NDph0Uhd8iHYZHNUfUzBfJN1E6NRB2EKwbx7MmgWloP-YysiRt4IfrE"/>
+</div>
+<div class="ml-4 overflow-hidden">
+<div class="text-sm font-bold text-nordic dark:text-white truncate">Marcus Chen</div>
+<div class="text-xs text-nordic/60 dark:text-gray-400 truncate">marcus.c@luxuryestates.com</div>
+<div class="mt-1 text-[10px] px-2 py-0.5 inline-block bg-gray-50 dark:bg-white/10 rounded text-nordic/50 dark:text-gray-400 group-hover:bg-white/50 transition-colors">ID: #USR-8821</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full flex items-center justify-between md:justify-start gap-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                    Agent
+                </span>
+<div class="flex items-center text-xs text-nordic/60 dark:text-gray-400">
+<span class="material-icons text-[14px] mr-1 text-gray-400">schedule</span>
+                    Away
+                </div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full grid grid-cols-2 gap-4">
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Properties</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">8</div>
+</div>
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Sales (YTD)</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">$1.8M</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-2 w-full flex justify-end">
+<button class="inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-600 bg-transparent text-xs font-medium rounded-lg text-nordic/70 dark:text-gray-300 hover:border-nordic hover:text-nordic dark:hover:text-white dark:hover:border-gray-400 focus:outline-none transition-colors w-full md:w-auto justify-center group-hover:bg-white group-hover:shadow-sm">
+                    Change Role
+                    <span class="material-icons text-[16px] ml-2">expand_more</span>
+</button>
+</div>
+</div>
+<div class="user-card relative bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col md:grid md:grid-cols-12 gap-4 items-center z-20">
+<div class="col-span-12 md:col-span-4 flex items-center w-full">
+<div class="relative flex-shrink-0">
+<img alt="Portrait of Elias Thorne" class="h-12 w-12 rounded-full object-cover" data-alt="Portrait of Elias Thorne" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxUenMO4Re0naHHGO3GB46gBwyGMA7GYH5XNQVi86xJtOVYUNoL1nn8Q65pwWZkyLQdR_vB2N8mOuxFtLT6blCwOerfNuVqSeqTpdrustLAO7-HYwjC_83sTmfBsuSmMXUPTAZub0b8Tgo2uGzoPZ2i98s_taTX232u4UPVO3NybNwYhzYw8FhvhRPAFvcI-QWnVtQO820Eex8lc8BoMd_fWRl3S6oU4opRnz9HCQOB15l5se_ousKRtbZcFE1JqcjKn1T1PrbGOE"/>
+<span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-yellow-400 ring-2 ring-white"></span>
+</div>
+<div class="ml-4 overflow-hidden">
+<div class="text-sm font-bold text-nordic dark:text-white truncate">Elias Thorne</div>
+<div class="text-xs text-nordic/60 dark:text-gray-400 truncate">elias.thorne@luxuryestates.com</div>
+<div class="mt-1 text-[10px] px-2 py-0.5 inline-block bg-gray-50 dark:bg-white/10 rounded text-nordic/50 dark:text-gray-400">ID: #USR-1029</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full flex items-center justify-between md:justify-start gap-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-nordic text-white">
+                    Administrator
+                </span>
+<div class="flex items-center text-xs text-nordic/60 dark:text-gray-400">
+<span class="material-icons text-[14px] mr-1 text-primary">check_circle</span>
+                    Active
+                </div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full grid grid-cols-2 gap-4">
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Properties</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">-</div>
+</div>
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Access Level</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">Level 5</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-2 w-full flex justify-end relative">
+<button class="inline-flex items-center px-4 py-2 bg-primary text-white shadow-md text-xs font-medium rounded-lg hover:bg-primary-dark focus:outline-none transition-colors w-full md:w-auto justify-center">
+                    Change Role
+                    <span class="material-icons text-[16px] ml-2">expand_less</span>
+</button>
+<div class="absolute top-full right-0 mt-2 w-48 rounded-lg shadow-dropdown bg-primary ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden z-50 origin-top-right animate-fade-in-down">
+<div aria-labelledby="options-menu" aria-orientation="vertical" class="py-1" role="menu">
+<a class="group flex items-center px-4 py-3 text-xs text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#" role="menuitem">
+<span class="material-icons text-sm mr-3 text-white/50 group-hover:text-white">shield</span>
+                            Administrator
+                        </a>
+<a class="group flex items-center px-4 py-3 text-xs text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#" role="menuitem">
+<span class="material-icons text-sm mr-3 text-white/50 group-hover:text-white">business_center</span>
+                            Broker
+                        </a>
+<a class="group flex items-center px-4 py-3 text-xs text-white hover:bg-white/20 font-medium transition-colors bg-white/10" href="#" role="menuitem">
+<span class="material-icons text-sm mr-3 text-white">support_agent</span>
+                            Agent
+                        </a>
+<a class="group flex items-center px-4 py-3 text-xs text-white/70 hover:bg-white/10 hover:text-white transition-colors" href="#" role="menuitem">
+<span class="material-icons text-sm mr-3 text-white/50 group-hover:text-white">visibility</span>
+                            Viewer
+                        </a>
+<div class="border-t border-white/10 my-1"></div>
+<a class="group flex items-center px-4 py-3 text-xs text-red-200 hover:bg-red-500/20 hover:text-red-100 transition-colors" href="#" role="menuitem">
+<span class="material-icons text-sm mr-3 text-red-300 group-hover:text-red-100">block</span>
+                            Suspend User
+                        </a>
+</div>
+</div>
+</div>
+</div>
+<div class="user-card group relative bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 hover:bg-active-green dark:hover:bg-primary/20 flex flex-col md:grid md:grid-cols-12 gap-4 items-center z-10">
+<div class="col-span-12 md:col-span-4 flex items-center w-full">
+<div class="relative flex-shrink-0">
+<img alt="Portrait of Anna Koval" class="h-12 w-12 rounded-full object-cover grayscale" data-alt="Portrait of Anna Koval" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9R6zvnu8j58sG4eUwo-9f00NJRnaHJllOxtW7NfLtjJiAJS9xgpRhQlnDfEULT1ntyQ00kNW93vDfqmwYwX1RCQPYBbvhlrs2VOAtipQyTT3C6te7SH_slUUdDRloL7IVp9QUnB8Ivo76jM9GbGTSedRCNENz2EG_QljoMFfWvhKp0s43vQePPAzlx8RC8KtwYuwd8ToaZVZxa2XoxnstlCppJhDJRvw5Ou981GU62MElNMA1fzr6yjX_QN1QSgdX--GMTBTb22I"/>
+</div>
+<div class="ml-4 overflow-hidden">
+<div class="text-sm font-bold text-nordic/60 dark:text-gray-400 truncate">Anna Koval</div>
+<div class="text-xs text-nordic/40 dark:text-gray-500 truncate">anna.k@luxuryestates.com</div>
+<div class="mt-1 text-[10px] px-2 py-0.5 inline-block bg-gray-50 dark:bg-white/5 rounded text-nordic/40 dark:text-gray-500 group-hover:bg-white/50 transition-colors">ID: #USR-3310</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full flex items-center justify-between md:justify-start gap-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                    Viewer
+                </span>
+<div class="flex items-center text-xs text-nordic/40 dark:text-gray-500">
+<span class="material-icons text-[14px] mr-1">remove_circle_outline</span>
+                    Inactive
+                </div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full grid grid-cols-2 gap-4">
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Properties</div>
+<div class="text-sm font-semibold text-nordic/60 dark:text-gray-400">0</div>
+</div>
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Last Login</div>
+<div class="text-sm font-semibold text-nordic/60 dark:text-gray-400">2mo ago</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-2 w-full flex justify-end">
+<button class="inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-600 bg-transparent text-xs font-medium rounded-lg text-nordic/70 dark:text-gray-300 hover:border-nordic hover:text-nordic dark:hover:text-white dark:hover:border-gray-400 focus:outline-none transition-colors w-full md:w-auto justify-center group-hover:bg-white group-hover:shadow-sm">
+                    Change Role
+                    <span class="material-icons text-[16px] ml-2">expand_more</span>
+</button>
+</div>
+</div>
+<div class="user-card group relative bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 hover:bg-active-green dark:hover:bg-primary/20 flex flex-col md:grid md:grid-cols-12 gap-4 items-center z-10">
+<div class="col-span-12 md:col-span-4 flex items-center w-full">
+<div class="relative flex-shrink-0">
+<img alt="Portrait of David O'Conner" class="h-12 w-12 rounded-full object-cover" data-alt="Portrait of David O'Conner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg2jyeiLRo7sss3zX5bvvLWpJNUabZqBCz9HIWx2jcHtvG5KfoaquiQRmwZWTLpD4Rr3jS3iRzWjTa0VLibUkWK_MxV6fzcMISmS1SEsNldZilln2O3A6992ZnLgEiD8ASlQ1cFmc-XvY1X7sK_3pBGUWYHWWutX34hxrAZ-HsCMlmBgatcSpPiTXo4ICkrQ7uSf490A6Bxx60h1ac_QZQl46jo1CciIMS6fFu2O2ZozSmTaFlwiOWhN1vo5n4gXQ0gjh785OlBLQ"/>
+</div>
+<div class="ml-4 overflow-hidden">
+<div class="text-sm font-bold text-nordic dark:text-white truncate">David O'Conner</div>
+<div class="text-xs text-nordic/60 dark:text-gray-400 truncate">david.o@luxuryestates.com</div>
+<div class="mt-1 text-[10px] px-2 py-0.5 inline-block bg-gray-50 dark:bg-white/10 rounded text-nordic/50 dark:text-gray-400 group-hover:bg-white/50 transition-colors">ID: #USR-9942</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full flex items-center justify-between md:justify-start gap-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                    Agent
+                </span>
+<div class="flex items-center text-xs text-nordic/60 dark:text-gray-400">
+<span class="material-icons text-[14px] mr-1 text-primary">check_circle</span>
+                    Active
+                </div>
+</div>
+<div class="col-span-12 md:col-span-3 w-full grid grid-cols-2 gap-4">
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Properties</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">14</div>
+</div>
+<div>
+<div class="text-[10px] uppercase tracking-wider text-nordic/40">Sales (YTD)</div>
+<div class="text-sm font-semibold text-nordic dark:text-white">$3.1M</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-2 w-full flex justify-end">
+<button class="inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-600 bg-transparent text-xs font-medium rounded-lg text-nordic/70 dark:text-gray-300 hover:border-nordic hover:text-nordic dark:hover:text-white dark:hover:border-gray-400 focus:outline-none transition-colors w-full md:w-auto justify-center group-hover:bg-white group-hover:shadow-sm">
+                    Change Role
+                    <span class="material-icons text-[16px] ml-2">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-nordic/5 bg-background-light dark:bg-background-dark py-6 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-nordic/60 dark:text-gray-400">
+                        Showing <span class="font-medium text-nordic dark:text-white">1</span> to <span class="font-medium text-nordic dark:text-white">5</span> of <span class="font-medium text-nordic dark:text-white">42</span> users
+                    </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="relative z-0 inline-flex rounded-md shadow-none -space-x-px">
+<a class="relative inline-flex items-center px-2 py-2 rounded-l-md text-sm font-medium text-nordic/50 hover:text-primary transition-colors" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-icons text-xl">chevron_left</span>
+</a>
+<a aria-current="page" class="z-10 bg-primary text-white relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md mx-1 shadow-sm" href="#">
+                            1
+                        </a>
+<a class="bg-transparent text-nordic/70 hover:bg-white hover:text-primary relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md mx-1 transition-colors" href="#">
+                            2
+                        </a>
+<a class="bg-transparent text-nordic/70 hover:bg-white hover:text-primary relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md mx-1 transition-colors" href="#">
+                            3
+                        </a>
+<span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-nordic/40">
+                            ...
+                        </span>
+<a class="bg-transparent text-nordic/70 hover:bg-white hover:text-primary relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md mx-1 transition-colors" href="#">
+                            8
+                        </a>
+<a class="relative inline-flex items-center px-2 py-2 rounded-r-md text-sm font-medium text-nordic/50 hover:text-primary transition-colors" href="#">
+<span class="sr-only">Next</span>
+<span class="material-icons text-xl">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center justify-between w-full sm:hidden">
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-nordic bg-white border border-gray-300 hover:bg-gray-50" href="#">
+                    Previous
+                </a>
+<a class="ml-3 relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-nordic bg-white border border-gray-300 hover:bg-gray-50" href="#">
+                    Next
+                </a>
+</div>
+</div>
+</footer>
+</body></html>
