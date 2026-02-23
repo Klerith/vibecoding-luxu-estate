@@ -20,37 +20,30 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Decorative Background */}
-      <div className="absolute inset-0 pointer-events-none opacity-40">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-accent/30 rounded-full blur-3xl dark:bg-primary/10"></div>
-        <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-      </div>
-
-      <main className="w-full max-w-md z-10">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary rounded-xl mb-6 shadow-soft text-white">
-            <span className="material-icons text-3xl font-material-icons">
-              apartment
+    <div className="bg-[#eff5f5] min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+      <main className="w-full max-w-md z-10 flex flex-col items-center">
+        <div className="text-center mb-8 flex flex-col items-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-[#006655] rounded-xl mb-4 text-white">
+            <span className="material-icons text-2xl font-material-icons">
+              real_estate_agent
             </span>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-nordic dark:text-white mb-2">
+          <h1 className="text-2xl font-bold tracking-tight text-[#162A28] mb-1.5">
             Welcome to LuxeEstate
           </h1>
-          <p className="text-nordic/60 dark:text-gray-400">
+          <p className="text-[#162A28]/60 text-sm">
             Unlock exclusive properties worldwide.
           </p>
         </div>
 
-        <div className="bg-surface dark:bg-[#152e2a] rounded-2xl shadow-soft p-8 sm:p-10 border border-white/50 dark:border-primary/20 backdrop-blur-sm">
+        <div className="bg-white w-full rounded-2xl p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           <div className="space-y-4">
             <button
               onClick={() => handleOAuthLogin('google')}
-              className="group w-full flex items-center justify-center gap-3 bg-white dark:bg-[#1a3833] border border-gray-100 dark:border-primary/30 rounded-lg p-3.5 text-nordic dark:text-white font-medium transition-all duration-300 hover:shadow-soft-hover hover:-translate-y-0.5 relative overflow-hidden"
+              className="w-full flex items-center justify-center gap-3 bg-white border border-[#E5E7EB] rounded-lg p-3.5 text-[#374151] font-medium text-sm transition-all duration-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200"
             >
-              <div className="absolute inset-0 bg-accent/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
               <svg
-                className="w-5 h-5 relative z-10"
+                className="w-4 h-4"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -71,29 +64,28 @@ export default function LoginPage() {
                   fill="#EA4335"
                 ></path>
               </svg>
-              <span className="relative z-10">Continue with Google</span>
+              <span>Continue with Google</span>
             </button>
             <button
               onClick={() => handleOAuthLogin('github')}
-              className="group w-full flex items-center justify-center gap-3 bg-white dark:bg-[#1a3833] border border-gray-100 dark:border-primary/30 rounded-lg p-3.5 text-nordic dark:text-white font-medium transition-all duration-300 hover:shadow-soft-hover hover:-translate-y-0.5 relative overflow-hidden"
+              className="w-full flex items-center justify-center gap-3 bg-white border border-[#E5E7EB] rounded-lg p-3.5 text-[#374151] font-medium text-sm transition-all duration-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200"
             >
-              <div className="absolute inset-0 bg-accent/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
               <svg
-                className="w-5 h-5 relative z-10 fill-current text-nordic dark:text-white"
+                className="w-5 h-5 fill-current text-[#1F2328]"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.419-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
               </svg>
-              <span className="relative z-10">Continue with GitHub</span>
+              <span>Continue with GitHub</span>
             </button>
           </div>
 
-          <p className="mt-8 text-center text-sm text-nordic/70 dark:text-gray-400">
+          <p className="mt-8 text-center text-[13px] text-[#6B7280]">
             Don&apos;t have an account?{' '}
             <Link
               href="/signup"
-              className="font-semibold text-primary hover:text-primary-dark transition-colors"
+              className="font-semibold text-[#006655] hover:text-[#004d40] transition-colors"
             >
               Sign up
             </Link>
@@ -101,23 +93,14 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-8 text-center">
-          <nav className="flex justify-center gap-6 text-xs text-nordic/50 dark:text-gray-500">
-            <Link
-              href="#"
-              className="hover:text-nordic dark:hover:text-gray-300 transition-colors"
-            >
+          <nav className="flex justify-center gap-6 text-[12px] text-[#9CA3AF]">
+            <Link href="#" className="hover:text-[#6B7280] transition-colors">
               Privacy Policy
             </Link>
-            <Link
-              href="#"
-              className="hover:text-nordic dark:hover:text-gray-300 transition-colors"
-            >
+            <Link href="#" className="hover:text-[#6B7280] transition-colors">
               Terms of Service
             </Link>
-            <Link
-              href="#"
-              className="hover:text-nordic dark:hover:text-gray-300 transition-colors"
-            >
+            <Link href="#" className="hover:text-[#6B7280] transition-colors">
               Help Center
             </Link>
           </nav>
