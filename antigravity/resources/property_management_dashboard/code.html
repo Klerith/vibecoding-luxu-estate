@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Property Management Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#006655", // Mosque
+                        "background-light": "#EEF6F6", // Clear Day (Requested in prompt, overriding default theme slightly for fidelity)
+                        "background-dark": "#0f2320",
+                        "nordic": "#19322F",
+                        "hint-green": "#D9ECC8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-nordic dark:text-gray-100 min-h-screen flex flex-col">
+<!-- Navbar -->
+<nav class="sticky top-0 z-50 bg-white dark:bg-[#152e2a] border-b border-primary/10 dark:border-primary/20 backdrop-blur-md bg-opacity-90">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16">
+<!-- Logo & Primary Nav -->
+<div class="flex">
+<div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold text-lg">H</div>
+<span class="font-bold text-xl tracking-tight text-nordic dark:text-white">Haven</span>
+</div>
+<div class="hidden md:ml-10 md:flex md:space-x-8">
+<a class="inline-flex items-center px-1 pt-1 border-b-2 border-primary text-sm font-medium text-nordic dark:text-white" href="#">
+                            Dashboard
+                        </a>
+<a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-primary hover:border-primary/30 transition-colors dark:text-gray-400" href="#">
+                            Listings
+                        </a>
+<a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-primary hover:border-primary/30 transition-colors dark:text-gray-400" href="#">
+                            Tenants
+                        </a>
+<a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-primary hover:border-primary/30 transition-colors dark:text-gray-400" href="#">
+                            Finance
+                        </a>
+</div>
+</div>
+<!-- Secondary Nav / Profile -->
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-gray-400 hover:text-primary hover:bg-primary/5 transition-colors">
+<span class="material-icons text-xl">notifications_none</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-gray-200 dark:border-gray-700">
+<div class="flex flex-col items-end hidden sm:flex">
+<span class="text-sm font-semibold text-nordic dark:text-white">Alex Morgan</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Premium Agent</span>
+</div>
+<div class="h-9 w-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-white dark:ring-primary/20 cursor-pointer">
+<img alt="User profile" class="h-full w-full object-cover" data-alt="Portrait of a smiling man in a suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOGZK5Jq_Tqk2BeXWfDxdvC2hZTk8NkXNHZOtopr3wzo5wRJePwR6Et_adclI555nmrESUtcgsw4X_Ma93qr0_RpbhJZUwJoP9VlTB7WwH1rht3HXqwi_zi2VLEQKYYZaBo4jhEYrPpHFoX77JHQvI8E2FYvsCWf_zJATSQfBVzGa4e3uMQrTLGzBJZI0D3dpIcWbedg_0ArvWQZGCyPR8Xq5oTrWnb7D7Ge2geZrlnGgv7Fy_lu3486yJYbQ7Z2nt6HyEeUrDwrk"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-bold text-nordic dark:text-white tracking-tight">My Properties</h1>
+<p class="text-gray-500 dark:text-gray-400 mt-1">Manage your portfolio and track performance.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-white dark:bg-[#152e2a] border border-gray-200 dark:border-primary/30 text-nordic dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-primary/10 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm inline-flex items-center gap-2">
+<span class="material-icons text-base">filter_list</span> Filter
+                </button>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-primary/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2">
+<span class="material-icons text-base">add</span> Add New Property
+                </button>
+</div>
+</div>
+<!-- Stats Overview (Optional context enhancement) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+<div class="bg-white dark:bg-[#152e2a] p-5 rounded-xl border border-primary/10 shadow-sm flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Listings</p>
+<p class="text-2xl font-bold text-nordic dark:text-white mt-1">24</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons">apartment</span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#152e2a] p-5 rounded-xl border border-primary/10 shadow-sm flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400">Active Properties</p>
+<p class="text-2xl font-bold text-nordic dark:text-white mt-1">18</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-hint-green flex items-center justify-center text-primary">
+<span class="material-icons">check_circle</span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#152e2a] p-5 rounded-xl border border-primary/10 shadow-sm flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400">Pending Sale</p>
+<p class="text-2xl font-bold text-nordic dark:text-white mt-1">4</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-icons">pending</span>
+</div>
+</div>
+</div>
+<!-- Property List Container -->
+<div class="bg-white dark:bg-[#152e2a] rounded-xl shadow-sm border border-gray-200 dark:border-primary/20 overflow-hidden">
+<!-- Table Header -->
+<div class="hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50/50 dark:bg-primary/5 border-b border-gray-100 dark:border-primary/10 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+<div class="col-span-6">Property Details</div>
+<div class="col-span-2">Price</div>
+<div class="col-span-2">Status</div>
+<div class="col-span-2 text-right">Actions</div>
+</div>
+<!-- List Item 1 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-gray-100 dark:border-primary/10 hover:bg-background-light dark:hover:bg-primary/5 transition-colors items-center">
+<!-- Property Details -->
+<div class="col-span-12 md:col-span-6 flex gap-4 items-center">
+<div class="relative h-20 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
+<img alt="Modern house exterior with large windows" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern house exterior with large windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk2ZSdNOQ0gAXqtE2fb8NByvZ3XDhK1eHyPrIVVzkKRxP--gmwVUs_dFtYH7ySMZBDJ9dUfLhxw1HqhJRxo0T5qrmKZz1GjWXADnSf4hEPvVDRm0aKTl3gRRF5M9S5wRufLo8fKI5Py_un_8jurvEW2rsKLVZXiOt9hZvHtaEHizJmZZC2ncBfdpPfu9UtyE_aFK_1NSxqRUcAyEWvWqLel7QMCA0_DAS7ch6BAEubDCw3iSjElZ-uF5TUlSkdQudUUhJJJ83mUuI"/>
+</div>
+<div>
+<h3 class="text-lg font-bold text-nordic dark:text-white group-hover:text-primary transition-colors cursor-pointer">The Nordic Villa</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">12 Willow Creek Ln, Copenhagen</p>
+<div class="flex items-center gap-3 mt-1.5 text-xs text-gray-400 dark:text-gray-500">
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bed</span> 4 Beds</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bathtub</span> 3 Baths</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span>2,450 sqft</span>
+</div>
+</div>
+</div>
+<!-- Price -->
+<div class="col-span-6 md:col-span-2">
+<div class="text-base font-semibold text-nordic dark:text-gray-200">$1,250,000</div>
+<div class="text-xs text-gray-400">Monthly: $4,500</div>
+</div>
+<!-- Status -->
+<div class="col-span-6 md:col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-hint-green text-primary border border-primary/10">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-1.5"></span>
+                        Active
+                    </span>
+</div>
+<!-- Actions -->
+<div class="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
+<button class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-hint-green/30 transition-all tooltip-trigger" title="Edit Property">
+<span class="material-icons text-xl">edit</span>
+</button>
+<button class="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all tooltip-trigger" title="Delete Property">
+<span class="material-icons text-xl">delete_outline</span>
+</button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-gray-100 dark:border-primary/10 hover:bg-background-light dark:hover:bg-primary/5 transition-colors items-center">
+<div class="col-span-12 md:col-span-6 flex gap-4 items-center">
+<div class="relative h-20 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
+<img alt="White modern apartment building exterior" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="White modern apartment building exterior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvjnJzYkn2uSsE2x2CSp6ta_eTDBXO0CZv61SwICEoMCfPe-cXvPfWieOb9hv9CnQctjbT43Fs4LcDrGOwXm4RhUAmZwiePudeFf6wid2-OWTpcQ1jl4SMOfOe_jSsjtjahG_azMWzAEvQ0Lsznu5nzMuAHgSN7A0vJzviwycaZsVzyYS4tVIpC1QprgwkIuolRTTXvY-OhBEuMuxtXQ4MJJH3k3FpWJX07kPgNzSqclGY5HvlrSlEEBoFvh_8Q9-JZTCFF8ipOWU"/>
+</div>
+<div>
+<h3 class="text-lg font-bold text-nordic dark:text-white group-hover:text-primary transition-colors cursor-pointer">Sunset Apartments</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">88 Ocean Blvd, Miami</p>
+<div class="flex items-center gap-3 mt-1.5 text-xs text-gray-400 dark:text-gray-500">
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bed</span> 2 Beds</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bathtub</span> 2 Baths</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span>1,100 sqft</span>
+</div>
+</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<div class="text-base font-semibold text-nordic dark:text-gray-200">$850,000</div>
+<div class="text-xs text-gray-400">Monthly: $3,200</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-500 mr-1.5"></span>
+                        Pending
+                    </span>
+</div>
+<div class="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
+<button class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-hint-green/30 transition-all">
+<span class="material-icons text-xl">edit</span>
+</button>
+<button class="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-icons text-xl">delete_outline</span>
+</button>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-gray-100 dark:border-primary/10 hover:bg-background-light dark:hover:bg-primary/5 transition-colors items-center">
+<div class="col-span-12 md:col-span-6 flex gap-4 items-center">
+<div class="relative h-20 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
+<img alt="Contemporary black house in forest" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Contemporary black house in forest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO_XzpFopH9b8yABT1a6LlIMtEJKX00xuhg2A0IeMjK9sALNffKjbe7t7f8gCqV5ZzBgmyXTq7pB9bqc3UWVnFMPevsVV4XVmVmYGeMx73HL0uaixP254RZfPJ-zWwsJ4WdYzi1mxC0BpDIzW-hZwVm37WY1SePsrzRCGzDdssQ8fuDXGat1chiFJTtJAnWQqGHIaApgBNfDlwItdrqc7Rz4nsaxgLOVGgJbBXzoxtcLKLkVWuf9KfnT_xwMYaD0ps9cLRzZtlRh0"/>
+</div>
+<div>
+<h3 class="text-lg font-bold text-nordic dark:text-white group-hover:text-primary transition-colors cursor-pointer">Forest Retreat</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">45 Pine Ridge, Portland</p>
+<div class="flex items-center gap-3 mt-1.5 text-xs text-gray-400 dark:text-gray-500">
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bed</span> 3 Beds</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bathtub</span> 2 Baths</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span>1,800 sqft</span>
+</div>
+</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<div class="text-base font-semibold text-nordic dark:text-gray-200">$920,000</div>
+<div class="text-xs text-gray-400">Monthly: $3,800</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-hint-green text-primary border border-primary/10">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-1.5"></span>
+                        Active
+                    </span>
+</div>
+<div class="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
+<button class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-hint-green/30 transition-all">
+<span class="material-icons text-xl">edit</span>
+</button>
+<button class="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-icons text-xl">delete_outline</span>
+</button>
+</div>
+</div>
+<!-- List Item 4 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-gray-100 dark:border-primary/10 hover:bg-background-light dark:hover:bg-primary/5 transition-colors items-center">
+<div class="col-span-12 md:col-span-6 flex gap-4 items-center">
+<div class="relative h-20 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
+<img alt="Suburban home with green lawn" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Suburban home with green lawn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm5jrJp_zdGyEfKQhZOpfX0eYAr_nK7lYpqgTo6B3X0V84hnvkBRKtd1NKfyzbZXptrnatucZKXEUdB_g4pmYytqZB_6-vGvs8VifQGG9fRqVL_Lr6350F_fSVeZh0hqULKewnVdwnGc8thCF8ARhaHzH9EtDknKo21GxwPEYTOXaaHEeGSVTSMSma2diZicSwy3jelgSoYNdpIQoMAgcmM2OlWB--DvX-WR-AYQ6rtTFbnnBwM1_2FW1r4bTYvX1Xw5KFp1GySqI"/>
+</div>
+<div>
+<h3 class="text-lg font-bold text-nordic dark:text-white group-hover:text-primary transition-colors cursor-pointer">The Family Estate</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">102 Maple Dr, Austin</p>
+<div class="flex items-center gap-3 mt-1.5 text-xs text-gray-400 dark:text-gray-500">
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bed</span> 5 Beds</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bathtub</span> 4 Baths</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span>3,200 sqft</span>
+</div>
+</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<div class="text-base font-semibold text-nordic dark:text-gray-200">$1,450,000</div>
+<div class="text-xs text-gray-400">Sold: Oct 12, 2023</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+<span class="w-1.5 h-1.5 rounded-full bg-gray-500 mr-1.5"></span>
+                        Sold
+                    </span>
+</div>
+<div class="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
+<button class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-hint-green/30 transition-all">
+<span class="material-icons text-xl">edit</span>
+</button>
+<button class="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-icons text-xl">delete_outline</span>
+</button>
+</div>
+</div>
+<!-- List Item 5 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 hover:bg-background-light dark:hover:bg-primary/5 transition-colors items-center">
+<div class="col-span-12 md:col-span-6 flex gap-4 items-center">
+<div class="relative h-20 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
+<img alt="Luxurious modern glass balcony" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Luxurious modern glass balcony" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3Kx0QAdUmL9txkYX2nBiMhiFrJIW59QWMclky71MuBfbl_DzIipQvGFMh8fxLAVvFg8otdIJr9lt4W4RkWo5lQlQFhqc_BCTDITjg-y2PGAZ8mewi_ipn_U_wASsLBvwXfK1akutnYmO_yIN23qhIHGZnkxxh7y7sfwD90EloN5uILLeA5NUVHbczcFicGewNod99A1k_IOfesqSTya9-dj5KifLlwcnuWggNHe4Gn2DREAc_6FcD6N_CpGybDw32EMk0AiRcWGY"/>
+</div>
+<div>
+<h3 class="text-lg font-bold text-nordic dark:text-white group-hover:text-primary transition-colors cursor-pointer">Skyline Penthouse</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">440 W 57th St, New York</p>
+<div class="flex items-center gap-3 mt-1.5 text-xs text-gray-400 dark:text-gray-500">
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bed</span> 3 Beds</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span class="flex items-center gap-1"><span class="material-icons text-[14px]">bathtub</span> 3.5 Baths</span>
+<span class="w-1 h-1 rounded-full bg-gray-300"></span>
+<span>2,800 sqft</span>
+</div>
+</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<div class="text-base font-semibold text-nordic dark:text-gray-200">$4,500,000</div>
+<div class="text-xs text-gray-400">Monthly: $15,000</div>
+</div>
+<div class="col-span-6 md:col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-hint-green text-primary border border-primary/10">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-1.5"></span>
+                        Active
+                    </span>
+</div>
+<div class="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
+<button class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-hint-green/30 transition-all">
+<span class="material-icons text-xl">edit</span>
+</button>
+<button class="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-icons text-xl">delete_outline</span>
+</button>
+</div>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-gray-100 dark:border-primary/20 flex items-center justify-between bg-gray-50/50 dark:bg-primary/5">
+<div class="text-sm text-gray-500 dark:text-gray-400">
+                    Showing <span class="font-medium text-nordic dark:text-white">1</span> to <span class="font-medium text-nordic dark:text-white">5</span> of <span class="font-medium text-nordic dark:text-white">24</span> results
+                </div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-sm border border-gray-200 dark:border-primary/30 rounded-md text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-primary/20 disabled:opacity-50">Previous</button>
+<button class="px-3 py-1 text-sm border border-gray-200 dark:border-primary/30 rounded-md text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-primary/20">Next</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-gray-200 dark:border-primary/20 bg-white dark:bg-[#152e2a]">
+<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+<p class="text-center text-sm text-gray-400 dark:text-gray-500">© 2023 Haven Property Management. All rights reserved.</p>
+</div>
+</footer>
+</body></html>
