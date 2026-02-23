@@ -53,12 +53,21 @@ export default async function Home({ searchParams }: HomePageProps) {
     .order('created_at', { ascending: false })
     .range(from, to);
 
+  const isFilterActive = !!(
+    location ||
+    minPrice ||
+    maxPrice ||
+    type ||
+    beds ||
+    baths
+  );
+
   return (
     <>
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <Hero />
-        <FeaturedCollection />
+        {!isFilterActive && <FeaturedCollection />}
         <NewInMarket
           properties={properties ?? []}
           totalCount={count ?? 0}
