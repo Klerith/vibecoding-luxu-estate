@@ -3,11 +3,16 @@ import Image from 'next/image';
 import { cookies } from 'next/headers';
 import { getDictionary } from '@/lib/i18n';
 import LanguageSelector from './LanguageSelector';
+import { createClient } from '@/lib/supabase/server';
 
 const Navbar = async () => {
   const cookieStore = await cookies();
   const locale = cookieStore.get('NEXT_LOCALE')?.value || 'es';
   const dict = getDictionary(locale);
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <nav className="sticky top-0 z-50 bg-clear-day/95 backdrop-blur-md border-b border-nordic/10">
@@ -69,16 +74,29 @@ const Navbar = async () => {
             </button>
 
             {/* Profile */}
-            <button className="flex items-center gap-2 pl-2 border-l border-nordic/10 ml-2">
-              <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all relative">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAWhQZ663Bd08kmzjbOPmUk4UIxYooNONShMEFXLR-DtmVi6Oz-TiaY77SPwFk7g0OobkeZEOMvt6v29mSOD0Xm2g95WbBG3ZjWXmiABOUwGU0LOySRfVDo-JTXQ0-gtwjWxbmue0qDm91m-zEOEZwAW6iRFB1qC1bAU-wkjxm67Sbztq8w7srHkFT9bVEC86qG-FzhOBTomhAurNRmx9l8Yfqabk328NfdKuVLckgCdaPsNFE3yN65MeoRi05GA_gXIMwG4YDIeA"
-                  alt="Profile"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </button>
+            {user ? (
+              <button className="flex items-center gap-2 pl-2 border-l border-nordic/10 ml-2">
+                <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all relative">
+                  <Image
+                    src={
+                      user.user_metadata.avatar_url ||
+                      'https://lh3.googleusercontent.com/aida-public/AB6AXuCAWhQZ663Bd08kmzjbOPmUk4UIxYooNONShMEFXLR-DtmVi6Oz-TiaY77SPwFk7g0OobkeZEOMvt6v29mSOD0Xm2g95WbBG3ZjWXmiABOUwGU0LOySRfVDo-JTXQ0-gtwjWxbmue0qDm91m-zEOEZwAW6iRFB1qC1bAU-wkjxm67Sbztq8w7srHkFT9bVEC86qG-FzhOBTomhAurNRmx9l8Yfqabk328NfdKuVLckgCdaPsNFE3yN65MeoRi05GA_gXIMwG4YDIeA'
+                    }
+                    alt="Profile"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="text-nordic hover:text-mosque font-medium text-sm pl-2 border-l border-nordic/10 ml-2 transition-colors"
+              >
+                {/* Need to translate this ideally later but using hardcoded for now, or just Sign in */}
+                Sing In
+              </Link>
+            )}
 
             <LanguageSelector currentLocale={locale} />
           </div>
