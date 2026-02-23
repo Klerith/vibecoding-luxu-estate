@@ -30,9 +30,9 @@ export default function LanguageSelector({
         disabled={isPending}
         className={`bg-transparent text-sm font-medium text-nordic border-none cursor-pointer focus:outline-none focus:ring-0 ${isPending ? 'opacity-50' : 'opacity-100'}`}
       >
-        <option value="es">ES</option>
-        <option value="en">EN</option>
-        <option value="fr">FR</option>
+        <option value="es">🇪🇸 ES</option>
+        <option value="en">🇺🇸 EN</option>
+        <option value="fr">🇫🇷 FR</option>
       </select>
     </div>
   );

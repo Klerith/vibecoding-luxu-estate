@@ -4,7 +4,16 @@ import { useState, FormEvent } from 'react';
 import FilterModal from './ui/FilterModal';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function Hero({ dict }: { dict: Record<string, string> }) {
+interface HeroDict {
+  title_start: string;
+  title_highlight: string;
+  title_end: string;
+  subtitle: string;
+  search_placeholder: string;
+  search_button: string;
+}
+
+export default function Hero({ dict }: { dict: HeroDict }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -23,13 +32,20 @@ export default function Hero({ dict }: { dict: Record<string, string> }) {
     params.delete('page');
     router.push(`/?${params.toString()}`);
   };
+
   return (
     <section className="py-12 md:py-16">
       <div className="max-w-3xl mx-auto text-center space-y-8">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-nordic leading-tight">
-          {dict.title}
+          {dict.title_start}
+          <span className="relative inline-block">
+            <span className="relative z-10 font-semibold">
+              {dict.title_highlight}
+            </span>
+            <span className="absolute bottom-2 left-0 w-full h-3 bg-mosque/20 -rotate-1 z-0"></span>
+          </span>
+          {dict.title_end}
         </h1>
-        <p className="text-xl text-nordic-muted">{dict.subtitle}</p>
 
         <form
           onSubmit={handleSearch}

@@ -4,6 +4,8 @@ import PropertyGallery from '@/components/PropertyGallery';
 import Navbar from '@/components/Navbar';
 import DynamicPropertyMap from '@/components/DynamicPropertyMap';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import { getDictionary } from '@/lib/i18n';
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
@@ -39,6 +41,11 @@ export async function generateMetadata({ params }: PropertyPageProps) {
 export default async function PropertyPage({ params }: PropertyPageProps) {
   const { slug } = await params;
   const supabase = await createClient();
+
+  const cookieStore = await cookies();
+  const locale = cookieStore.get('NEXT_LOCALE')?.value || 'es';
+  const dict = getDictionary(locale);
+  const t = dict.property_detail;
 
   const { data: property } = await supabase
     .from('properties')
@@ -96,7 +103,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                     <h3 className="font-semibold text-nordic">Sarah Jenkins</h3>
                     <div className="flex items-center gap-1 text-xs text-mosque font-medium">
                       <span className="material-icons text-[14px]">star</span>
-                      <span>Top Rated Agent</span>
+                      <span>{t.top_rated_agent}</span>
                     </div>
                   </div>
                   <div className="ml-auto flex gap-2">
@@ -114,11 +121,11 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                     <span className="material-icons text-xl group-hover:scale-110 transition-transform">
                       calendar_today
                     </span>
-                    Schedule Visit
+                    {t.schedule_visit}
                   </button>
                   <button className="w-full bg-transparent border border-nordic/10 hover:border-mosque text-nordic/80 hover:text-mosque py-4 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
                     <span className="material-icons text-xl">mail_outline</span>
-                    Contact Agent
+                    {t.contact_agent}
                   </button>
                 </div>
               </div>
@@ -133,7 +140,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                 ) : (
                   <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden bg-slate-100 flex items-center justify-center">
                     <span className="text-nordic/50 font-medium">
-                      Map data not available
+                      {t.map_unavailable}
                     </span>
                   </div>
                 )}
@@ -144,7 +151,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
           <div className="lg:col-span-8 lg:row-start-2 -mt-8 space-y-8">
             <div className="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
               <h2 className="text-lg font-semibold mb-6 text-nordic">
-                Property Features
+                {t.property_features}
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
@@ -155,7 +162,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                     {property.sqft}
                   </span>
                   <span className="text-xs uppercase tracking-wider text-nordic/50">
-                    Square Meters
+                    {t.square_meters}
                   </span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
@@ -166,7 +173,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                     {property.beds}
                   </span>
                   <span className="text-xs uppercase tracking-wider text-nordic/50">
-                    Bedrooms
+                    {t.bedrooms}
                   </span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
@@ -177,7 +184,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                     {property.baths}
                   </span>
                   <span className="text-xs uppercase tracking-wider text-nordic/50">
-                    Bathrooms
+                    {t.bathrooms}
                   </span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
@@ -186,7 +193,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                   </span>
                   <span className="text-xl font-bold text-nordic">2</span>
                   <span className="text-xs uppercase tracking-wider text-nordic/50">
-                    Garage
+                    {t.garage}
                   </span>
                 </div>
               </div>
@@ -194,7 +201,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
             <div className="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
               <h2 className="text-lg font-semibold mb-4 text-nordic">
-                About this home
+                {t.about_home}
               </h2>
               <div className="prose prose-slate max-w-none text-nordic/70 leading-relaxed">
                 <p className="mb-4">
@@ -213,51 +220,51 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                 </p>
               </div>
               <button className="mt-4 text-mosque font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
-                Read more
+                {t.read_more}
                 <span className="material-icons text-sm">arrow_forward</span>
               </button>
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
               <h2 className="text-lg font-semibold mb-6 text-nordic">
-                Amenities
+                {t.amenities}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                 <div className="flex items-center gap-3 text-nordic/70">
                   <span className="material-icons text-mosque/60 text-sm">
                     check_circle
                   </span>
-                  <span>Smart Home System</span>
+                  <span>{t.smart_home}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic/70">
                   <span className="material-icons text-mosque/60 text-sm">
                     check_circle
                   </span>
-                  <span>Swimming Pool</span>
+                  <span>{t.swimming_pool}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic/70">
                   <span className="material-icons text-mosque/60 text-sm">
                     check_circle
                   </span>
-                  <span>Central Heating &amp; Cooling</span>
+                  <span>{t.heating_cooling}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic/70">
                   <span className="material-icons text-mosque/60 text-sm">
                     check_circle
                   </span>
-                  <span>Electric Vehicle Charging</span>
+                  <span>{t.ev_charging}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic/70">
                   <span className="material-icons text-mosque/60 text-sm">
                     check_circle
                   </span>
-                  <span>Private Gym</span>
+                  <span>{t.private_gym}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic/70">
                   <span className="material-icons text-mosque/60 text-sm">
                     check_circle
                   </span>
-                  <span>Wine Cellar</span>
+                  <span>{t.wine_cellar}</span>
                 </div>
               </div>
             </div>
@@ -269,17 +276,17 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-nordic">
-                    Estimated Payment
+                    {t.estimated_payment}
                   </h3>
                   <p className="text-sm text-nordic/60">
-                    Starting from{' '}
-                    <strong className="text-mosque">$5,430/mo</strong> with 20%
-                    down
+                    {t.starting_from}{' '}
+                    <strong className="text-mosque">$5,430/mo</strong> 20%{' '}
+                    {t.down}
                   </p>
                 </div>
               </div>
               <button className="whitespace-nowrap px-4 py-2 bg-white border border-nordic/10 rounded-lg text-sm font-semibold hover:border-mosque transition-colors text-nordic">
-                Calculate Mortgage
+                {t.calculate_mortgage}
               </button>
             </div>
           </div>
@@ -288,9 +295,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
       <footer className="bg-white border-t border-slate-200 mt-12 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-sm text-nordic/50">
-            © 2023 LuxeEstate Inc. All rights reserved.
-          </div>
+          <div className="text-sm text-nordic/50">{t.footer_rights}</div>
           <div className="flex gap-6">
             <a
               href="#"

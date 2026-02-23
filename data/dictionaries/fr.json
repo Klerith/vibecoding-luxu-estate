@@ -6,13 +6,15 @@
     "saved_homes": "Sauvegardés"
   },
   "hero": {
-    "title": "Trouvez la maison de vos rêves",
+    "title_start": "Trouvez votre ",
+    "title_highlight": "sanctuaire",
+    "title_end": ".",
     "subtitle": "Découvrez les meilleures propriétés sur le marché",
-    "search_placeholder": "Rechercher par emplacement...",
+    "search_placeholder": "Rechercher par ville, quartier ou adresse...",
     "search_button": "Rechercher"
   },
   "common": {
-    "featured_properties": "Propriétés en Vedette",
+    "featured_properties": "Collections en Vedette",
     "new_in_market": "Nouveau sur le Marché",
     "view_details": "Voir les Détails",
     "any_type": "Tout Type",
@@ -24,5 +26,30 @@
     },
     "beds": "Lits",
     "baths": "Bains"
+  },
+  "property_detail": {
+    "schedule_visit": "Planifier une Visite",
+    "contact_agent": "Contacter l'Agent",
+    "property_features": "Caractéristiques",
+    "square_meters": "Mètres Carrés",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de Bain",
+    "garage": "Garage",
+    "about_home": "À propos de ce bien",
+    "read_more": "Lire la suite",
+    "amenities": "Équipements",
+    "smart_home": "Maison Intelligente",
+    "swimming_pool": "Piscine",
+    "heating_cooling": "Chauffage & Climatisation",
+    "ev_charging": "Charge Véhicule Électrique",
+    "private_gym": "Salle de Sport Privée",
+    "wine_cellar": "Cave à Vin",
+    "estimated_payment": "Paiement Estimé",
+    "starting_from": "À partir de",
+    "down": "d'apport",
+    "calculate_mortgage": "Calculer le Prêt",
+    "map_unavailable": "Données cartographiques indisponibles",
+    "top_rated_agent": "Agent Mieux Noté",
+    "footer_rights": "© 2025 LuxeEstate Inc. Tous droits réservés."
   }
 }

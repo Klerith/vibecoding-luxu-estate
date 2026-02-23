@@ -2,12 +2,9 @@ import Link from 'next/link';
 import { Collection } from '@/data/mockData';
 import CollectionCard from './ui/CollectionCard';
 import { createClient } from '@/lib/supabase/server';
+import type { CommonDict } from '@/types/i18n';
 
-const FeaturedCollection = async ({
-  dict,
-}: {
-  dict: Record<string, string>;
-}) => {
+const FeaturedCollection = async ({ dict }: { dict: CommonDict }) => {
   const supabase = await createClient();
 
   const { data: properties } = await supabase

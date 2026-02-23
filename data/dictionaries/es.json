@@ -6,13 +6,15 @@
     "saved_homes": "Guardados"
   },
   "hero": {
-    "title": "Encuentra la casa de tus sueños",
+    "title_start": "Encuentra tu ",
+    "title_highlight": "santuario",
+    "title_end": ".",
     "subtitle": "Descubre las mejores propiedades en el mercado",
-    "search_placeholder": "Buscar por ubicación...",
+    "search_placeholder": "Buscar por ciudad, barrio o dirección...",
     "search_button": "Buscar"
   },
   "common": {
-    "featured_properties": "Propiedades Destacadas",
+    "featured_properties": "Colecciones Destacadas",
     "new_in_market": "Nuevas en el Mercado",
     "view_details": "Ver Detalles",
     "any_type": "Cualquier Tipo",
@@ -24,5 +26,30 @@
     },
     "beds": "Camas",
     "baths": "Baños"
+  },
+  "property_detail": {
+    "schedule_visit": "Agendar Visita",
+    "contact_agent": "Contactar Agente",
+    "property_features": "Características",
+    "square_meters": "Metros Cuadrados",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "garage": "Garaje",
+    "about_home": "Acerca de esta propiedad",
+    "read_more": "Leer más",
+    "amenities": "Comodidades",
+    "smart_home": "Sistema de Hogar Inteligente",
+    "swimming_pool": "Piscina",
+    "heating_cooling": "Calefacción y Climatización",
+    "ev_charging": "Carga para Vehículo Eléctrico",
+    "private_gym": "Gimnasio Privado",
+    "wine_cellar": "Bodega de Vinos",
+    "estimated_payment": "Pago Estimado",
+    "starting_from": "Desde",
+    "down": "de entrada",
+    "calculate_mortgage": "Calcular Hipoteca",
+    "map_unavailable": "Datos del mapa no disponibles",
+    "top_rated_agent": "Agente Mejor Valorado",
+    "footer_rights": "© 2025 LuxeEstate Inc. Todos los derechos reservados."
   }
 }

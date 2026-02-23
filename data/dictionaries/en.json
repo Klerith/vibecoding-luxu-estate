@@ -6,13 +6,15 @@
     "saved_homes": "Saved Homes"
   },
   "hero": {
-    "title": "Find Your Dream Home",
+    "title_start": "Find your ",
+    "title_highlight": "sanctuary",
+    "title_end": ".",
     "subtitle": "Discover the best properties in the market",
-    "search_placeholder": "Search by location...",
+    "search_placeholder": "Search by city, neighborhood, or address...",
     "search_button": "Search"
   },
   "common": {
-    "featured_properties": "Featured Properties",
+    "featured_properties": "Featured Collections",
     "new_in_market": "New in Market",
     "view_details": "View Details",
     "any_type": "Any Type",
@@ -24,5 +26,30 @@
     },
     "beds": "Beds",
     "baths": "Baths"
+  },
+  "property_detail": {
+    "schedule_visit": "Schedule Visit",
+    "contact_agent": "Contact Agent",
+    "property_features": "Property Features",
+    "square_meters": "Square Meters",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "garage": "Garage",
+    "about_home": "About this home",
+    "read_more": "Read more",
+    "amenities": "Amenities",
+    "smart_home": "Smart Home System",
+    "swimming_pool": "Swimming Pool",
+    "heating_cooling": "Central Heating & Cooling",
+    "ev_charging": "Electric Vehicle Charging",
+    "private_gym": "Private Gym",
+    "wine_cellar": "Wine Cellar",
+    "estimated_payment": "Estimated Payment",
+    "starting_from": "Starting from",
+    "down": "down",
+    "calculate_mortgage": "Calculate Mortgage",
+    "map_unavailable": "Map data not available",
+    "top_rated_agent": "Top Rated Agent",
+    "footer_rights": "© 2025 LuxeEstate Inc. All rights reserved."
   }
 }

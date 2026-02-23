@@ -1,9 +1,10 @@
 import PropertyCard from './ui/PropertyCard';
 import Pagination from './Pagination';
 import { Property } from '@/types/property';
+import type { CommonDict } from '@/types/i18n';
 
 interface NewInMarketProps {
-  dict: Record<string, any>;
+  dict: CommonDict;
   properties: Property[];
   totalCount: number;
   currentPage: number;
