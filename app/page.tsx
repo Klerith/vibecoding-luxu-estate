@@ -76,7 +76,7 @@ export default async function Home({ searchParams }: HomePageProps) {
         {!isFilterActive && <FeaturedCollection dict={dict.common} />}
         <NewInMarket
           dict={dict.common}
-          properties={properties ?? []}
+          properties={(properties ?? []) as any}
           totalCount={count ?? 0}
           currentPage={currentPage}
           pageSize={PAGE_SIZE}

@@ -1,19 +1,40 @@
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 
-export default async function AdminPropertiesPage() {
+export default async function AdminPropertiesPage(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParams = await props.searchParams;
+  const page = Number(searchParams?.page) || 1;
+  const limit = 10;
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
   const supabase = await createClient();
+
+  const { count } = await supabase
+    .from('properties')
+    .select('*', { count: 'exact', head: true });
+
+  const totalPages = count ? Math.ceil(count / limit) : 1;
+
   const { data: properties, error } = await supabase
     .from('properties')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .range(from, to);
+
+  const { data: allProperties } = await supabase
+    .from('properties')
+    .select('is_featured');
 
   if (error) {
     return <div className="p-8 text-red-500">Error loading properties</div>;
   }
 
   const activePropertiesCount =
-    properties?.filter((p) => p.is_featured)?.length || 0;
+    allProperties?.filter((p) => p.is_featured)?.length || 0;
+  const totalListings = count || 0;
   const pendingCount = 0;
 
   return (
@@ -48,7 +69,7 @@ export default async function AdminPropertiesPage() {
           <div>
             <p className="text-sm font-medium text-nordic/60">Total Listings</p>
             <p className="text-2xl font-bold text-nordic mt-1">
-              {properties?.length || 0}
+              {totalListings}
             </p>
           </div>
           <div className="h-10 w-10 rounded-full bg-mosque/10 flex items-center justify-center text-mosque">
@@ -179,6 +200,53 @@ export default async function AdminPropertiesPage() {
         {(!properties || properties.length === 0) && (
           <div className="text-center py-12 text-sm text-nordic/50">
             No properties found.
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between px-6 py-4 border-t border-nordic/10 bg-gray-50/50">
+            <div className="text-sm text-nordic/60">
+              Showing{' '}
+              <span className="font-medium text-nordic">{from + 1}</span> to{' '}
+              <span className="font-medium text-nordic">
+                {Math.min(to + 1, totalListings)}
+              </span>{' '}
+              of{' '}
+              <span className="font-medium text-nordic">{totalListings}</span>{' '}
+              results
+            </div>
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/admin/properties?page=${Math.max(1, page - 1)}`}
+                className={`p-2 rounded-lg border border-nordic/10 bg-white text-nordic/60 hover:text-nordic hover:bg-gray-50 transition-colors ${page === 1 ? 'pointer-events-none opacity-50' : ''}`}
+              >
+                <span className="material-icons text-xl block">
+                  chevron_left
+                </span>
+              </Link>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (p) => (
+                    <Link
+                      key={p}
+                      href={`/admin/properties?page=${p}`}
+                      className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${page === p ? 'bg-mosque text-white' : 'text-nordic/60 hover:text-nordic hover:bg-gray-100'}`}
+                    >
+                      {p}
+                    </Link>
+                  ),
+                )}
+              </div>
+              <Link
+                href={`/admin/properties?page=${Math.min(totalPages, page + 1)}`}
+                className={`p-2 rounded-lg border border-nordic/10 bg-white text-nordic/60 hover:text-nordic hover:bg-gray-50 transition-colors ${page === totalPages ? 'pointer-events-none opacity-50' : ''}`}
+              >
+                <span className="material-icons text-xl block">
+                  chevron_right
+                </span>
+              </Link>
+            </div>
           </div>
         )}
       </div>

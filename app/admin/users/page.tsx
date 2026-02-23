@@ -1,9 +1,22 @@
 import { createClient } from '@/lib/supabase/server';
 import { toggleUserRole } from './actions';
+import Link from 'next/link';
 
-export default async function AdminUsersPage() {
+export default async function AdminUsersPage(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParams = await props.searchParams;
+  const page = Number(searchParams?.page) || 1;
+  const limit = 10;
+
   const supabase = await createClient();
-  const { data: users, error } = await supabase.rpc('get_admin_users');
+  const { data: allUsers, error } = await supabase.rpc('get_admin_users');
+
+  const count = allUsers?.length || 0;
+  const totalPages = count ? Math.ceil(count / limit) : 1;
+  const from = (page - 1) * limit;
+  const to = from + limit;
+  const users = allUsers?.slice(from, to) || [];
 
   if (error) {
     return (
@@ -38,8 +51,8 @@ export default async function AdminUsersPage() {
                 type="text"
               />
             </div>
-            <button className="inline-flex items-center justify-center px-4 py-2.5 border border-mosque text-sm font-medium rounded-lg text-mosque bg-transparent hover:bg-mosque/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mosque transition-colors whitespace-nowrap">
-              <span className="material-icons text-lg mr-2">add</span>
+            <button className="bg-mosque hover:bg-mosque/90 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-mosque/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 whitespace-nowrap">
+              <span className="material-icons text-base">add</span>
               Add User
             </button>
           </div>
@@ -145,6 +158,52 @@ export default async function AdminUsersPage() {
         {(!users || users.length === 0) && (
           <div className="text-center py-12 text-sm text-nordic/50">
             No users found.
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between px-6 py-4 border-t border-nordic/10 bg-gray-50/50 rounded-xl mt-6">
+            <div className="text-sm text-nordic/60">
+              Showing{' '}
+              <span className="font-medium text-nordic">{from + 1}</span> to{' '}
+              <span className="font-medium text-nordic">
+                {Math.min(to, count)}
+              </span>{' '}
+              of <span className="font-medium text-nordic">{count}</span>{' '}
+              results
+            </div>
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/admin/users?page=${Math.max(1, page - 1)}`}
+                className={`p-2 rounded-lg border border-nordic/10 bg-white text-nordic/60 hover:text-nordic hover:bg-gray-50 transition-colors ${page === 1 ? 'pointer-events-none opacity-50' : ''}`}
+              >
+                <span className="material-icons text-xl block">
+                  chevron_left
+                </span>
+              </Link>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (p) => (
+                    <Link
+                      key={p}
+                      href={`/admin/users?page=${p}`}
+                      className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${page === p ? 'bg-mosque text-white' : 'text-nordic/60 hover:text-nordic hover:bg-gray-100'}`}
+                    >
+                      {p}
+                    </Link>
+                  ),
+                )}
+              </div>
+              <Link
+                href={`/admin/users?page=${Math.min(totalPages, page + 1)}`}
+                className={`p-2 rounded-lg border border-nordic/10 bg-white text-nordic/60 hover:text-nordic hover:bg-gray-50 transition-colors ${page === totalPages ? 'pointer-events-none opacity-50' : ''}`}
+              >
+                <span className="material-icons text-xl block">
+                  chevron_right
+                </span>
+              </Link>
+            </div>
           </div>
         )}
       </main>
