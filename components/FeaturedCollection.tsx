@@ -16,10 +16,10 @@ const FeaturedCollection = async ({ dict }: { dict: CommonDict }) => {
   const collections: Collection[] = (properties || []).map((p) => ({
     id: p.id,
     title: p.title,
-    slug: p.slug,
+    slug: p.slug || undefined,
     location: p.location,
     price: p.price,
-    images: p.images,
+    images: p.images || [],
     beds: p.beds,
     baths: p.baths,
     sqft: p.sqft,

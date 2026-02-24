@@ -16,4 +16,8 @@ export interface Property {
   is_featured?: boolean;
   lat?: number;
   lng?: number;
+  description?: string;
+  year_built?: number;
+  parking?: number;
+  amenities?: string[];
 }
