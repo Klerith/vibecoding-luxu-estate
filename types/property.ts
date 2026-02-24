@@ -14,6 +14,7 @@ export interface Property {
   is_new: boolean;
   created_at: string;
   is_featured?: boolean;
+  is_active?: boolean;
   lat?: number;
   lng?: number;
   description?: string;

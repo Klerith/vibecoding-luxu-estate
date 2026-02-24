@@ -1,5 +1,20 @@
+'use server';
+
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
+import { revalidatePath } from 'next/cache';
+
+async function togglePropertyStatus(formData: FormData) {
+  'use server';
+  const id = formData.get('id') as string;
+  const currentStatus = formData.get('is_active') === 'true';
+  const supabase = await createClient();
+  await supabase
+    .from('properties')
+    .update({ is_active: !currentStatus })
+    .eq('id', id);
+  revalidatePath('/admin/properties');
+}
 
 export default async function AdminPropertiesPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -12,6 +27,7 @@ export default async function AdminPropertiesPage(props: {
 
   const supabase = await createClient();
 
+  // Admin sees ALL properties (active + inactive)
   const { count } = await supabase
     .from('properties')
     .select('*', { count: 'exact', head: true });
@@ -24,18 +40,13 @@ export default async function AdminPropertiesPage(props: {
     .order('created_at', { ascending: false })
     .range(from, to);
 
-  const { data: allProperties } = await supabase
-    .from('properties')
-    .select('is_featured');
-
   if (error) {
     return <div className="p-8 text-red-500">Error loading properties</div>;
   }
 
-  const activePropertiesCount =
-    allProperties?.filter((p) => p.is_featured)?.length || 0;
+  const activeCount = properties?.filter((p) => p.is_active).length || 0;
   const totalListings = count || 0;
-  const pendingCount = 0;
+  const inactiveCount = properties?.filter((p) => !p.is_active).length || 0;
 
   return (
     <main className="grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -50,9 +61,6 @@ export default async function AdminPropertiesPage(props: {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="bg-white border border-nordic/10 text-nordic hover:bg-gray-50 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm inline-flex items-center gap-2">
-            <span className="material-icons text-base">filter_list</span> Filter
-          </button>
           <Link
             href="/admin/properties/create"
             className="bg-mosque hover:bg-mosque/90 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-mosque/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2"
@@ -79,11 +87,9 @@ export default async function AdminPropertiesPage(props: {
         <div className="bg-white p-5 rounded-xl border border-nordic/10 shadow-sm flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-nordic/60">
-              Active Properties
+              Active Listings
             </p>
-            <p className="text-2xl font-bold text-nordic mt-1">
-              {activePropertiesCount}
-            </p>
+            <p className="text-2xl font-bold text-nordic mt-1">{activeCount}</p>
           </div>
           <div className="h-10 w-10 rounded-full bg-hint-of-green flex items-center justify-center text-mosque">
             <span className="material-icons">check_circle</span>
@@ -91,13 +97,15 @@ export default async function AdminPropertiesPage(props: {
         </div>
         <div className="bg-white p-5 rounded-xl border border-nordic/10 shadow-sm flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-nordic/60">Pending Sale</p>
+            <p className="text-sm font-medium text-nordic/60">
+              Inactive Listings
+            </p>
             <p className="text-2xl font-bold text-nordic mt-1">
-              {pendingCount}
+              {inactiveCount}
             </p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
-            <span className="material-icons">pending</span>
+          <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+            <span className="material-icons">visibility_off</span>
           </div>
         </div>
       </div>
@@ -115,7 +123,9 @@ export default async function AdminPropertiesPage(props: {
         {properties?.map((property) => (
           <div
             key={property.id}
-            className="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-nordic/10 hover:bg-clear-day transition-colors items-center"
+            className={`group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-nordic/10 hover:bg-clear-day transition-colors items-center ${
+              !property.is_active ? 'opacity-60' : ''
+            }`}
           >
             {/* Property Details */}
             <div className="col-span-12 md:col-span-6 flex gap-4 items-center">
@@ -129,6 +139,13 @@ export default async function AdminPropertiesPage(props: {
                     'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400'
                   }
                 />
+                {!property.is_active && (
+                  <div className="absolute inset-0 bg-gray-900/40 flex items-center justify-center">
+                    <span className="material-icons text-white text-2xl">
+                      visibility_off
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="overflow-hidden">
                 <Link href={`/properties/${property.slug}`}>
@@ -164,16 +181,22 @@ export default async function AdminPropertiesPage(props: {
             </div>
 
             {/* Status */}
-            <div className="col-span-6 md:col-span-2">
-              {property.is_featured ? (
+            <div className="col-span-6 md:col-span-2 flex flex-col gap-1.5">
+              {property.is_active ? (
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span>
+                  Active
+                </span>
+              ) : (
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-50 text-red-600 border border-red-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
+                  Inactive
+                </span>
+              )}
+              {property.is_featured && (
                 <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-hint-of-green text-mosque border border-mosque/10">
                   <span className="w-1.5 h-1.5 rounded-full bg-mosque mr-1.5"></span>
                   Featured
-                </span>
-              ) : (
-                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-500 mr-1.5"></span>
-                  Standard
                 </span>
               )}
             </div>
@@ -182,17 +205,38 @@ export default async function AdminPropertiesPage(props: {
             <div className="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
               <Link
                 href={`/admin/properties/${property.slug}/edit`}
-                className="p-2 rounded-lg text-nordic/40 hover:text-mosque hover:bg-hint-of-green/50 transition-all tooltip-trigger"
+                className="p-2 rounded-lg text-nordic/40 hover:text-mosque hover:bg-hint-of-green/50 transition-all"
                 title="Edit Property"
               >
                 <span className="material-icons text-xl">edit</span>
               </Link>
-              <button
-                className="p-2 rounded-lg text-nordic/40 hover:text-red-600 hover:bg-red-50 transition-all tooltip-trigger"
-                title="Delete Property"
-              >
-                <span className="material-icons text-xl">delete_outline</span>
-              </button>
+
+              {/* Deactivate / Activate toggle */}
+              <form action={togglePropertyStatus}>
+                <input type="hidden" name="id" value={property.id} />
+                <input
+                  type="hidden"
+                  name="is_active"
+                  value={String(property.is_active)}
+                />
+                <button
+                  type="submit"
+                  title={
+                    property.is_active
+                      ? 'Deactivate Property'
+                      : 'Activate Property'
+                  }
+                  className={`p-2 rounded-lg transition-all ${
+                    property.is_active
+                      ? 'text-nordic/40 hover:text-red-600 hover:bg-red-50'
+                      : 'text-nordic/40 hover:text-emerald-600 hover:bg-emerald-50'
+                  }`}
+                >
+                  <span className="material-icons text-xl">
+                    {property.is_active ? 'visibility_off' : 'visibility'}
+                  </span>
+                </button>
+              </form>
             </div>
           </div>
         ))}

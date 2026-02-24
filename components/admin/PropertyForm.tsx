@@ -34,6 +34,7 @@ export default function PropertyForm({ initialData }: PropertyFormProps) {
     parking: initialData?.parking || 0,
     amenities: initialData?.amenities || [],
     is_featured: initialData?.is_featured || false,
+    is_active: initialData?.is_active ?? true,
     images: initialData?.images || [],
   });
 
@@ -238,18 +239,38 @@ export default function PropertyForm({ initialData }: PropertyFormProps) {
                 Basic Information
               </h2>
             </div>
-            <label className="flex items-center gap-2 cursor-pointer bg-white px-3 py-1.5 rounded-md border border-gray-200 shadow-sm">
-              <input
-                id="is_featured"
-                type="checkbox"
-                checked={formData.is_featured}
-                onChange={handleInputChange}
-                className="w-4 h-4 text-mosque border-gray-300 rounded focus:ring-mosque"
-              />
-              <span className="text-sm font-medium text-nordic group-hover:text-mosque transition-colors">
-                Featured Property
-              </span>
-            </label>
+            <div className="flex items-center gap-2">
+              <label className="flex items-center gap-2 cursor-pointer bg-white px-3 py-1.5 rounded-md border border-gray-200 shadow-sm">
+                <input
+                  id="is_featured"
+                  type="checkbox"
+                  checked={formData.is_featured}
+                  onChange={handleInputChange}
+                  className="w-4 h-4 text-mosque border-gray-300 rounded focus:ring-mosque"
+                />
+                <span className="text-sm font-medium text-nordic transition-colors">
+                  Featured
+                </span>
+              </label>
+              <label
+                className={`flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-md border shadow-sm transition-colors ${
+                  formData.is_active
+                    ? 'bg-emerald-50 border-emerald-300 text-emerald-700'
+                    : 'bg-red-50 border-red-300 text-red-600'
+                }`}
+              >
+                <input
+                  id="is_active"
+                  type="checkbox"
+                  checked={formData.is_active}
+                  onChange={handleInputChange}
+                  className="w-4 h-4 border-gray-300 rounded"
+                />
+                <span className="text-sm font-medium">
+                  {formData.is_active ? 'Active' : 'Inactive'}
+                </span>
+              </label>
+            </div>
           </div>
           <div className="p-8 space-y-6">
             <div className="group">
