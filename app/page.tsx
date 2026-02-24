@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: HomePageProps) {
     .eq('is_active', true);
 
   if (location) {
-    query = query.ilike('location', `%${location}%`);
+    query = query.or(`location.ilike.%${location}%,title.ilike.%${location}%`);
   }
   if (minPrice) {
     query = query.gte('price', parseInt(minPrice, 10));
