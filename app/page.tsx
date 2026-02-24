@@ -5,6 +5,7 @@ import NewInMarket from '@/components/NewInMarket';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import { getDictionary } from '@/lib/i18n';
+import { Property } from '@/types/property';
 
 const PAGE_SIZE = 8;
 
@@ -76,7 +77,7 @@ export default async function Home({ searchParams }: HomePageProps) {
         {!isFilterActive && <FeaturedCollection dict={dict.common} />}
         <NewInMarket
           dict={dict.common}
-          properties={(properties ?? []) as any}
+          properties={(properties ?? []) as unknown as Property[]}
           totalCount={count ?? 0}
           currentPage={currentPage}
           pageSize={PAGE_SIZE}

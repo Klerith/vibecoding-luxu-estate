@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Property } from '@/types/property';
 import { createClient } from '@/lib/supabase/client';
 import Image from 'next/image';
+import DynamicPropertyMap from '@/components/DynamicPropertyMap';
 
 interface PropertyFormProps {
   initialData?: Property;
@@ -493,24 +494,33 @@ export default function PropertyForm({ initialData }: PropertyFormProps) {
                 />
               </div>
             </div>
-            {/* Keeping the map placeholder from the HTML design as it serves as a visual element, 
-                could be implemented with actual maps later */}
-            <div className="relative h-48 w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200 group">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=600"
-                alt="Map View Placeholder"
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500"
-              />
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span className="bg-white/90 text-nordic px-3 py-1.5 rounded shadow-sm backdrop-blur-sm text-xs font-bold font-sans flex items-center gap-1">
-                  <span className="material-icons text-sm text-mosque">
-                    map
-                  </span>{' '}
-                  Map Location
-                </span>
+            {typeof formData.lat === 'number' &&
+            typeof formData.lng === 'number' ? (
+              <div className="mt-4">
+                <DynamicPropertyMap
+                  lat={formData.lat}
+                  lng={formData.lng}
+                  address={formData.location}
+                />
               </div>
-            </div>
+            ) : (
+              <div className="relative h-48 w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200 group">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=600"
+                  alt="Map View Placeholder"
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500"
+                />
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <span className="bg-white/90 text-nordic px-3 py-1.5 rounded shadow-sm backdrop-blur-sm text-xs font-bold font-sans flex items-center gap-1">
+                    <span className="material-icons text-sm text-mosque">
+                      map
+                    </span>{' '}
+                    Map Location
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

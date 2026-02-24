@@ -2,6 +2,7 @@ import PropertyForm from '@/components/admin/PropertyForm';
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Property } from '@/types/property';
 
 export default async function EditPropertyPage(props: {
   params: Promise<{ id: string }>;
@@ -54,7 +55,7 @@ export default async function EditPropertyPage(props: {
           </div>
         </div>
       </header>
-      <PropertyForm initialData={property as unknown as any} />
+      <PropertyForm initialData={property as unknown as Property} />
     </main>
   );
 }

@@ -38,6 +38,7 @@ export default function FilterModal({
   // Initialize from URL params when opening
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLocation(searchParams.get('location') || '');
       setMinPrice(searchParams.get('minPrice') || '');
       setMaxPrice(searchParams.get('maxPrice') || '');
