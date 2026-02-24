@@ -38,16 +38,15 @@ export async function GET(request: Request) {
       // Ensure user has a role record
       await supabase.rpc('ensure_user_role');
 
-      const forwardedHost = request.headers.get('x-forwarded-host'); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === 'development';
-      if (isLocalEnv) {
-        // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
-        return NextResponse.redirect(`${origin}${next}`);
-      } else if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`);
-      } else {
-        return NextResponse.redirect(`${origin}${next}`);
-      }
+      // Use NEXT_PUBLIC_SITE_URL in production to avoid redirect issues when
+      // Supabase Site URL is still pointing to localhost.
+      const baseUrl = isLocalEnv
+        ? origin
+        : (process.env.NEXT_PUBLIC_SITE_URL ??
+          `https://${request.headers.get('x-forwarded-host') ?? new URL(request.url).host}`);
+
+      return NextResponse.redirect(`${baseUrl}${next}`);
     }
   }
 
