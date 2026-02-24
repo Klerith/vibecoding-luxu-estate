@@ -23,6 +23,8 @@ export default function PropertyForm({ initialData }: PropertyFormProps) {
     price: initialData?.price || 0,
     type: initialData?.type || 'sale',
     location: initialData?.location || '',
+    lat: initialData?.lat ?? undefined,
+    lng: initialData?.lng ?? undefined,
     beds: initialData?.beds || 0,
     baths: initialData?.baths || 0,
     sqft: initialData?.sqft || 0,
@@ -50,7 +52,13 @@ export default function PropertyForm({ initialData }: PropertyFormProps) {
     let parsedValue: any = value;
 
     if (type === 'number') {
-      parsedValue = value === '' ? 0 : Number(value);
+      const optionalFields = ['lat', 'lng'];
+      parsedValue =
+        value === ''
+          ? optionalFields.includes(id)
+            ? undefined
+            : 0
+          : Number(value);
     } else if (type === 'checkbox') {
       parsedValue = (e.target as HTMLInputElement).checked;
     }
@@ -448,6 +456,42 @@ export default function PropertyForm({ initialData }: PropertyFormProps) {
                 className="w-full px-4 py-2.5 rounded-md border-gray-200 bg-white text-nordic placeholder-gray-400 focus:ring-1 focus:ring-mosque focus:border-mosque transition-all text-sm font-sans"
                 placeholder="Street Address, City, Zip"
               />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label
+                  className="block text-sm font-medium text-nordic mb-1.5 font-sans"
+                  htmlFor="lat"
+                >
+                  Latitude
+                </label>
+                <input
+                  id="lat"
+                  type="number"
+                  step="any"
+                  value={formData.lat ?? ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2.5 rounded-md border-gray-200 bg-white text-nordic placeholder-gray-400 focus:ring-1 focus:ring-mosque focus:border-mosque transition-all text-sm font-sans"
+                  placeholder="e.g. 40.7128"
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-sm font-medium text-nordic mb-1.5 font-sans"
+                  htmlFor="lng"
+                >
+                  Longitude
+                </label>
+                <input
+                  id="lng"
+                  type="number"
+                  step="any"
+                  value={formData.lng ?? ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2.5 rounded-md border-gray-200 bg-white text-nordic placeholder-gray-400 focus:ring-1 focus:ring-mosque focus:border-mosque transition-all text-sm font-sans"
+                  placeholder="e.g. -74.0060"
+                />
+              </div>
             </div>
             {/* Keeping the map placeholder from the HTML design as it serves as a visual element, 
                 could be implemented with actual maps later */}
